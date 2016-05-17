@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FAB0B4391CEBB0BC00CE2FF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B4381CEBB0BC00CE2FF6 /* AppDelegate.swift */; };
+		FAB0B43B1CEBB0BC00CE2FF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B43A1CEBB0BC00CE2FF6 /* ViewController.swift */; };
+		FAB0B43E1CEBB0BC00CE2FF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB0B43C1CEBB0BC00CE2FF6 /* Main.storyboard */; };
+		FAB0B4401CEBB0BC00CE2FF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB0B43F1CEBB0BC00CE2FF6 /* Assets.xcassets */; };
+		FAB0B4431CEBB0BC00CE2FF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB0B4411CEBB0BC00CE2FF6 /* LaunchScreen.storyboard */; };
+		FAB0B44E1CEBB0BC00CE2FF6 /* BarcelonetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B44D1CEBB0BC00CE2FF6 /* BarcelonetaTests.swift */; };
+		FAB0B4591CEBB0BC00CE2FF6 /* BarcelonetaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B4581CEBB0BC00CE2FF6 /* BarcelonetaUITests.swift */; };
+		FAB0B4681CEBB1E800CE2FF6 /* Barceloneta.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B4671CEBB1E800CE2FF6 /* Barceloneta.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAB0B44A1CEBB0BC00CE2FF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAB0B42D1CEBB0BC00CE2FF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAB0B4341CEBB0BC00CE2FF6;
+			remoteInfo = Barceloneta;
+		};
+		FAB0B4551CEBB0BC00CE2FF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAB0B42D1CEBB0BC00CE2FF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAB0B4341CEBB0BC00CE2FF6;
+			remoteInfo = Barceloneta;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FAB0B4351CEBB0BC00CE2FF6 /* Barceloneta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barceloneta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB0B4381CEBB0BC00CE2FF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FAB0B43A1CEBB0BC00CE2FF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAB0B43D1CEBB0BC00CE2FF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FAB0B43F1CEBB0BC00CE2FF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAB0B4421CEBB0BC00CE2FF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FAB0B4441CEBB0BC00CE2FF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB0B4491CEBB0BC00CE2FF6 /* BarcelonetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BarcelonetaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB0B44D1CEBB0BC00CE2FF6 /* BarcelonetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcelonetaTests.swift; sourceTree = "<group>"; };
+		FAB0B44F1CEBB0BC00CE2FF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB0B4541CEBB0BC00CE2FF6 /* BarcelonetaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BarcelonetaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAB0B4581CEBB0BC00CE2FF6 /* BarcelonetaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcelonetaUITests.swift; sourceTree = "<group>"; };
+		FAB0B45A1CEBB0BC00CE2FF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB0B4671CEBB1E800CE2FF6 /* Barceloneta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barceloneta.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAB0B4321CEBB0BC00CE2FF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB0B4461CEBB0BC00CE2FF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB0B4511CEBB0BC00CE2FF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FAB0B42C1CEBB0BC00CE2FF6 = {
+			isa = PBXGroup;
+			children = (
+				FAB0B4371CEBB0BC00CE2FF6 /* Barceloneta */,
+				FAB0B44C1CEBB0BC00CE2FF6 /* BarcelonetaTests */,
+				FAB0B4571CEBB0BC00CE2FF6 /* BarcelonetaUITests */,
+				FAB0B4361CEBB0BC00CE2FF6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FAB0B4361CEBB0BC00CE2FF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAB0B4351CEBB0BC00CE2FF6 /* Barceloneta.app */,
+				FAB0B4491CEBB0BC00CE2FF6 /* BarcelonetaTests.xctest */,
+				FAB0B4541CEBB0BC00CE2FF6 /* BarcelonetaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAB0B4371CEBB0BC00CE2FF6 /* Barceloneta */ = {
+			isa = PBXGroup;
+			children = (
+				FAB0B4381CEBB0BC00CE2FF6 /* AppDelegate.swift */,
+				FAB0B4661CEBB1E800CE2FF6 /* Library */,
+				FAB0B43A1CEBB0BC00CE2FF6 /* ViewController.swift */,
+				FAB0B43C1CEBB0BC00CE2FF6 /* Main.storyboard */,
+				FAB0B43F1CEBB0BC00CE2FF6 /* Assets.xcassets */,
+				FAB0B4411CEBB0BC00CE2FF6 /* LaunchScreen.storyboard */,
+				FAB0B4441CEBB0BC00CE2FF6 /* Info.plist */,
+			);
+			path = Barceloneta;
+			sourceTree = "<group>";
+		};
+		FAB0B44C1CEBB0BC00CE2FF6 /* BarcelonetaTests */ = {
+			isa = PBXGroup;
+			children = (
+				FAB0B44D1CEBB0BC00CE2FF6 /* BarcelonetaTests.swift */,
+				FAB0B44F1CEBB0BC00CE2FF6 /* Info.plist */,
+			);
+			path = BarcelonetaTests;
+			sourceTree = "<group>";
+		};
+		FAB0B4571CEBB0BC00CE2FF6 /* BarcelonetaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FAB0B4581CEBB0BC00CE2FF6 /* BarcelonetaUITests.swift */,
+				FAB0B45A1CEBB0BC00CE2FF6 /* Info.plist */,
+			);
+			path = BarcelonetaUITests;
+			sourceTree = "<group>";
+		};
+		FAB0B4661CEBB1E800CE2FF6 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				FAB0B4671CEBB1E800CE2FF6 /* Barceloneta.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FAB0B4341CEBB0BC00CE2FF6 /* Barceloneta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAB0B45D1CEBB0BC00CE2FF6 /* Build configuration list for PBXNativeTarget "Barceloneta" */;
+			buildPhases = (
+				FAB0B4311CEBB0BC00CE2FF6 /* Sources */,
+				FAB0B4321CEBB0BC00CE2FF6 /* Frameworks */,
+				FAB0B4331CEBB0BC00CE2FF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Barceloneta;
+			productName = Barceloneta;
+			productReference = FAB0B4351CEBB0BC00CE2FF6 /* Barceloneta.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FAB0B4481CEBB0BC00CE2FF6 /* BarcelonetaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAB0B4601CEBB0BC00CE2FF6 /* Build configuration list for PBXNativeTarget "BarcelonetaTests" */;
+			buildPhases = (
+				FAB0B4451CEBB0BC00CE2FF6 /* Sources */,
+				FAB0B4461CEBB0BC00CE2FF6 /* Frameworks */,
+				FAB0B4471CEBB0BC00CE2FF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAB0B44B1CEBB0BC00CE2FF6 /* PBXTargetDependency */,
+			);
+			name = BarcelonetaTests;
+			productName = BarcelonetaTests;
+			productReference = FAB0B4491CEBB0BC00CE2FF6 /* BarcelonetaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FAB0B4531CEBB0BC00CE2FF6 /* BarcelonetaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAB0B4631CEBB0BC00CE2FF6 /* Build configuration list for PBXNativeTarget "BarcelonetaUITests" */;
+			buildPhases = (
+				FAB0B4501CEBB0BC00CE2FF6 /* Sources */,
+				FAB0B4511CEBB0BC00CE2FF6 /* Frameworks */,
+				FAB0B4521CEBB0BC00CE2FF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAB0B4561CEBB0BC00CE2FF6 /* PBXTargetDependency */,
+			);
+			name = BarcelonetaUITests;
+			productName = BarcelonetaUITests;
+			productReference = FAB0B4541CEBB0BC00CE2FF6 /* BarcelonetaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAB0B42D1CEBB0BC00CE2FF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Arnaud Schloune";
+				TargetAttributes = {
+					FAB0B4341CEBB0BC00CE2FF6 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					FAB0B4481CEBB0BC00CE2FF6 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = FAB0B4341CEBB0BC00CE2FF6;
+					};
+					FAB0B4531CEBB0BC00CE2FF6 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = FAB0B4341CEBB0BC00CE2FF6;
+					};
+				};
+			};
+			buildConfigurationList = FAB0B4301CEBB0BC00CE2FF6 /* Build configuration list for PBXProject "Barceloneta" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FAB0B42C1CEBB0BC00CE2FF6;
+			productRefGroup = FAB0B4361CEBB0BC00CE2FF6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAB0B4341CEBB0BC00CE2FF6 /* Barceloneta */,
+				FAB0B4481CEBB0BC00CE2FF6 /* BarcelonetaTests */,
+				FAB0B4531CEBB0BC00CE2FF6 /* BarcelonetaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FAB0B4331CEBB0BC00CE2FF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB0B4431CEBB0BC00CE2FF6 /* LaunchScreen.storyboard in Resources */,
+				FAB0B4401CEBB0BC00CE2FF6 /* Assets.xcassets in Resources */,
+				FAB0B43E1CEBB0BC00CE2FF6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB0B4471CEBB0BC00CE2FF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB0B4521CEBB0BC00CE2FF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAB0B4311CEBB0BC00CE2FF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB0B4681CEBB1E800CE2FF6 /* Barceloneta.swift in Sources */,
+				FAB0B43B1CEBB0BC00CE2FF6 /* ViewController.swift in Sources */,
+				FAB0B4391CEBB0BC00CE2FF6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB0B4451CEBB0BC00CE2FF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB0B44E1CEBB0BC00CE2FF6 /* BarcelonetaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAB0B4501CEBB0BC00CE2FF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAB0B4591CEBB0BC00CE2FF6 /* BarcelonetaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FAB0B44B1CEBB0BC00CE2FF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAB0B4341CEBB0BC00CE2FF6 /* Barceloneta */;
+			targetProxy = FAB0B44A1CEBB0BC00CE2FF6 /* PBXContainerItemProxy */;
+		};
+		FAB0B4561CEBB0BC00CE2FF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAB0B4341CEBB0BC00CE2FF6 /* Barceloneta */;
+			targetProxy = FAB0B4551CEBB0BC00CE2FF6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FAB0B43C1CEBB0BC00CE2FF6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAB0B43D1CEBB0BC00CE2FF6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FAB0B4411CEBB0BC00CE2FF6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAB0B4421CEBB0BC00CE2FF6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FAB0B45B1CEBB0BC00CE2FF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FAB0B45C1CEBB0BC00CE2FF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FAB0B45E1CEBB0BC00CE2FF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Barceloneta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = es.Barceloneta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FAB0B45F1CEBB0BC00CE2FF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Barceloneta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = es.Barceloneta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FAB0B4611CEBB0BC00CE2FF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BarcelonetaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = es.BarcelonetaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Barceloneta.app/Barceloneta";
+			};
+			name = Debug;
+		};
+		FAB0B4621CEBB0BC00CE2FF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BarcelonetaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = es.BarcelonetaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Barceloneta.app/Barceloneta";
+			};
+			name = Release;
+		};
+		FAB0B4641CEBB0BC00CE2FF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BarcelonetaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = es.BarcelonetaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Barceloneta;
+			};
+			name = Debug;
+		};
+		FAB0B4651CEBB0BC00CE2FF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BarcelonetaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = es.BarcelonetaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Barceloneta;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAB0B4301CEBB0BC00CE2FF6 /* Build configuration list for PBXProject "Barceloneta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB0B45B1CEBB0BC00CE2FF6 /* Debug */,
+				FAB0B45C1CEBB0BC00CE2FF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAB0B45D1CEBB0BC00CE2FF6 /* Build configuration list for PBXNativeTarget "Barceloneta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB0B45E1CEBB0BC00CE2FF6 /* Debug */,
+				FAB0B45F1CEBB0BC00CE2FF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAB0B4601CEBB0BC00CE2FF6 /* Build configuration list for PBXNativeTarget "BarcelonetaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB0B4611CEBB0BC00CE2FF6 /* Debug */,
+				FAB0B4621CEBB0BC00CE2FF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAB0B4631CEBB0BC00CE2FF6 /* Build configuration list for PBXNativeTarget "BarcelonetaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB0B4641CEBB0BC00CE2FF6 /* Debug */,
+				FAB0B4651CEBB0BC00CE2FF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAB0B42D1CEBB0BC00CE2FF6 /* Project object */;
+}
