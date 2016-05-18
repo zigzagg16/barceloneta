@@ -13,12 +13,12 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     @IBOutlet weak var barcelonetaView: Barceloneta!
     @IBOutlet weak var barcelontaViewVerticalConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var valueLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         barcelonetaView.layer.cornerRadius = 3.0
-        
-        
         barcelonetaView.makeVerticalElastic(barcelontaViewVerticalConstraint, delegate: self)
     }
 
@@ -38,7 +38,8 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     }
     
     func didChangeValue(value:Double){
-        
+     
+        valueLabel.text = "\(value)"
     }
     
     

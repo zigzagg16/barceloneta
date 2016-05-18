@@ -17,15 +17,21 @@ protocol BarcelonetaDelegate:class {
 }
 
 class Barceloneta: UIView {
-    
-    var elasticPanGesture:UIPanGestureRecognizer! = nil
-    var verticalConstraint:NSLayoutConstraint! = nil
-    let verticalLimit : CGFloat = 50.0
-    private var originalConstant : CGFloat = 0.0
+    //Configuration variables
+    var loops = true
+    var numberOfValues = 10
+    var initialValue = 0
+    var verticalLimit:CGFloat = 50.0
     var value:Double = 0.0
+    
+    //Internal varibles
+    private var elasticPanGesture:UIPanGestureRecognizer! = nil
+    private var verticalConstraint:NSLayoutConstraint! = nil
+    private var originalConstant : CGFloat = 0.0
     weak var delegate:BarcelonetaDelegate?
     
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
+        self.delegate = delegate
         originalConstant = verticalConstraint.constant
         self.verticalConstraint = verticalConstraint
         if elasticPanGesture == nil {
@@ -36,25 +42,32 @@ class Barceloneta: UIView {
     
     func panned(sender: UIPanGestureRecognizer) {
         let yTranslation = sender.translationInView(self).y
+        
+        //If ! movesUp, consider that the view moves down
+        let movesUp = yTranslation < 0
+//        print(movesUp)
 
         //too low
         if yTranslation > verticalLimit {
             verticalConstraint.constant = logConstraintValueForYPosition(yTranslation)
-            if(sender.state == UIGestureRecognizerState.Ended ){
-                animateViewBackToOrigin()
-                decrement()
-            }
+            decrement()
+            
         } //Too high
         else if yTranslation < (verticalLimit * -1.0){
             verticalConstraint.constant = ((logConstraintValueForYPosition(yTranslation * -1)) * -1)
-            if(sender.state == UIGestureRecognizerState.Ended ){
-                animateViewBackToOrigin()
-                increment()
-            }
+            increment()
         }
         else {
             verticalConstraint.constant = yTranslation
         }
+        
+        if(sender.state == UIGestureRecognizerState.Ended ){
+            animateViewBackToOrigin()
+        }
+        
+        let percentage = 100.0 / (verticalLimit/verticalConstraint.constant)
+//        print("\(yTranslation) == \(percentage)/100")
+        print("\(Int(percentage))/100")
     }
     
     private func logConstraintValueForYPosition(yPosition : CGFloat) -> CGFloat {

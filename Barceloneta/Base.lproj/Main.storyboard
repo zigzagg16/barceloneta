@@ -47,6 +47,7 @@
                     <connections>
                         <outlet property="barcelonetaView" destination="pWg-BY-ghn" id="beM-5W-0mc"/>
                         <outlet property="barcelontaViewVerticalConstraint" destination="jju-hl-2Dc" id="pUA-6E-BzF"/>
+                        <outlet property="valueLabel" destination="xJ2-FQ-Wer" id="bFe-UT-F8c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
