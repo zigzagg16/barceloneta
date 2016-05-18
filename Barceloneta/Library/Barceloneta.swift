@@ -23,14 +23,23 @@ class Barceloneta: UIView {
     var initialValue = 0
     var verticalLimit:CGFloat = 50.0
     var value:Double = 0.0
+    var timerInterval = 0.2
+    var percentage:Int = 100
+    var incrementalSettings:[(range:Range<Int>,value:Double)] = [(range:0..<50,value:1.0),(range:50..<70,value:2.0),(range:70..<90,value:3.5),(range:90..<500,value:5.2)]
+    var incrementalValue:Double = 1.0
     
     //Internal varibles
+    private var timer = NSTimer()
     private var elasticPanGesture:UIPanGestureRecognizer! = nil
-    private var verticalConstraint:NSLayoutConstraint! = nil
+    private weak var verticalConstraint:NSLayoutConstraint! = nil
     private var originalConstant : CGFloat = 0.0
     weak var delegate:BarcelonetaDelegate?
+    private var movesUp = true
     
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
+        
+        print(incrementalSettings)
+        
         self.delegate = delegate
         originalConstant = verticalConstraint.constant
         self.verticalConstraint = verticalConstraint
@@ -41,33 +50,51 @@ class Barceloneta: UIView {
     }
     
     func panned(sender: UIPanGestureRecognizer) {
+        
+        if(sender.state == .Began){
+            timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
+        }
+        
         let yTranslation = sender.translationInView(self).y
         
         //If ! movesUp, consider that the view moves down
-        let movesUp = yTranslation < 0
+        movesUp = yTranslation < 0
+        
 //        print(movesUp)
 
         //too low
         if yTranslation > verticalLimit {
-            verticalConstraint.constant = logConstraintValueForYPosition(yTranslation)
-            decrement()
-            
+            verticalConstraint.constant = originalConstant + logConstraintValueForYPosition(yTranslation)
         } //Too high
         else if yTranslation < (verticalLimit * -1.0){
-            verticalConstraint.constant = ((logConstraintValueForYPosition(yTranslation * -1)) * -1)
-            increment()
+            verticalConstraint.constant = originalConstant + ((logConstraintValueForYPosition(yTranslation * -1)) * -1)
         }
         else {
-            verticalConstraint.constant = yTranslation
+            verticalConstraint.constant = originalConstant + yTranslation
         }
         
         if(sender.state == UIGestureRecognizerState.Ended ){
             animateViewBackToOrigin()
+            timer.invalidate()
         }
         
-        let percentage = 100.0 / (verticalLimit/verticalConstraint.constant)
-//        print("\(yTranslation) == \(percentage)/100")
-        print("\(Int(percentage))/100")
+        let prct = Int(100.0 / (verticalLimit/verticalConstraint.constant))
+        percentage = prct < 0 ? prct * -1 : prct
+        //Find a setting matching the percentage
+        let settings = incrementalSettings.filter({return $0.range ~= percentage})
+        if settings.count == 1{
+            //If a setting is found, the incremental value is applied
+            incrementalValue = settings[0].value
+        }
+    }
+    
+    func timerCalled() {
+//        print("timerCalled()")
+        if movesUp {
+            increment()
+        }else{
+            decrement()
+        }
     }
     
     private func logConstraintValueForYPosition(yPosition : CGFloat) -> CGFloat {
@@ -75,12 +102,12 @@ class Barceloneta: UIView {
     }
     
     private func increment(){
-        value += 1
+        value += incrementalValue
         delegate?.didChangeValue(value)
     }
     
     private func decrement(){
-        value -= 1
+        value -= incrementalValue
         delegate?.didChangeValue(value)
     }
     
