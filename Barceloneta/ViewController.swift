@@ -31,7 +31,7 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         valueLabel.text = "\(value)"
     }
     func barcelonetaDidRelease(view:Barceloneta){
-        print("the suer released the barceloneta")
+        print("the user released la barceloneta")
     }
     
     

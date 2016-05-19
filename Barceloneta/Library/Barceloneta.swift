@@ -20,21 +20,22 @@ protocol BarcelonetaDelegate:class {
 class Barceloneta: UIView {
     //Configuration variables
     var loops = true
-    var numberOfValues = 10
     var initialValue = 0
     var verticalLimit:CGFloat = 50.0
     var value:Double = 0.0
-    var timerInterval = 0.2
-    var percentage:Int = 100
+    var minimumValue:Double = 0.0
+    var maximumValue:Double = 50.0
+    var timerInterval = 0.3
     var incrementalSettings:[(range:Range<Int>,value:Double)] = [(range:0..<50,value:1.0),(range:50..<70,value:2.0),(range:70..<90,value:10.0),(range:90..<500,value:30.0)]
     var incrementalValue:Double = 1.0
     
     //Internal varibles
+    weak var delegate:BarcelonetaDelegate?
+    private var percentage:Int = 100
     private var timer = NSTimer()
     private var elasticPanGesture:UIPanGestureRecognizer! = nil
     private weak var verticalConstraint:NSLayoutConstraint! = nil
     private var originalConstant : CGFloat = 0.0
-    weak var delegate:BarcelonetaDelegate?
     private var movesUp = true
     
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
@@ -103,13 +104,28 @@ class Barceloneta: UIView {
     }
     
     private func increment(){
-        value += incrementalValue
+        let newValue = value + incrementalValue
+        checkValueAndApply(newValue)
         delegate?.barcelonetaDidChangeValue(self, value: value)
     }
     
     private func decrement(){
-        value -= incrementalValue
+        let newValue = value - incrementalValue
+        checkValueAndApply(newValue)
         delegate?.barcelonetaDidChangeValue(self, value: value)
+    }
+    
+    private func checkValueAndApply(newValue:Double){
+    
+        if newValue > maximumValue{
+            value = loops ? minimumValue : maximumValue
+        }
+        else if newValue < minimumValue {
+            value = loops ? maximumValue : minimumValue
+        }
+        else {
+            value = newValue
+        }
     }
     
     private func animateViewBackToOrigin() {
