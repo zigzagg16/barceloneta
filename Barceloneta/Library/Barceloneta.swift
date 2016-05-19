@@ -10,10 +10,11 @@
 import UIKit
 
 protocol BarcelonetaDelegate:class {
-    func didMovedUp()
-    func didMovedDown()
-    func didRestore()
-    func didChangeValue(value:Double)
+    func barcelonetaDidMovedUp()
+    func barcelonetaDidMovedDown()
+    func barcelonetaDidRestore()
+    func barcelonetaDidChangeValue(view:Barceloneta,value:Double)
+    func barcelonetaDidRelease(view:Barceloneta)
 }
 
 class Barceloneta: UIView {
@@ -25,7 +26,7 @@ class Barceloneta: UIView {
     var value:Double = 0.0
     var timerInterval = 0.2
     var percentage:Int = 100
-    var incrementalSettings:[(range:Range<Int>,value:Double)] = [(range:0..<50,value:1.0),(range:50..<70,value:2.0),(range:70..<90,value:3.5),(range:90..<500,value:5.2)]
+    var incrementalSettings:[(range:Range<Int>,value:Double)] = [(range:0..<50,value:1.0),(range:50..<70,value:2.0),(range:70..<90,value:10.0),(range:90..<500,value:30.0)]
     var incrementalValue:Double = 1.0
     
     //Internal varibles
@@ -103,12 +104,12 @@ class Barceloneta: UIView {
     
     private func increment(){
         value += incrementalValue
-        delegate?.didChangeValue(value)
+        delegate?.barcelonetaDidChangeValue(self, value: value)
     }
     
     private func decrement(){
         value -= incrementalValue
-        delegate?.didChangeValue(value)
+        delegate?.barcelonetaDidChangeValue(self, value: value)
     }
     
     private func animateViewBackToOrigin() {
@@ -118,5 +119,7 @@ class Barceloneta: UIView {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.superview!.layoutIfNeeded()
             }, completion: nil)
+        
+        delegate?.barcelonetaDidRelease(self)
     }
 }

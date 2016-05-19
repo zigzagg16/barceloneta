@@ -22,24 +22,16 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         barcelonetaView.makeVerticalElastic(barcelontaViewVerticalConstraint, delegate: self)
     }
 
-    //MARK: - Delegate
+    //MARK: - BarcelonetaDelegate
     
-    
-    func didMovedUp(){
-    
-    }
-    func didMovedDown()
-    {
-    
-    }
-    
-    func didRestore(){
-    
-    }
-    
-    func didChangeValue(value:Double){
-     
+    func barcelonetaDidMovedUp(){}
+    func barcelonetaDidMovedDown(){}
+    func barcelonetaDidRestore(){}
+    func barcelonetaDidChangeValue(view:Barceloneta,value:Double){
         valueLabel.text = "\(value)"
+    }
+    func barcelonetaDidRelease(view:Barceloneta){
+        print("the suer released the barceloneta")
     }
     
     
