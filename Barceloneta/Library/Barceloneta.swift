@@ -40,7 +40,7 @@ class Barceloneta: UIView {
     
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
         
-        print(incrementalSettings)
+//        print(incrementalSettings)
         
         self.delegate = delegate
         originalConstant = verticalConstraint.constant
@@ -62,8 +62,16 @@ class Barceloneta: UIView {
         //If ! movesUp, consider that the view moves down
         movesUp = yTranslation < 0
         
-//        print(movesUp)
-
+        
+        //If the view is dragged beyond the verticalLimit (Up or down)
+//        if yTranslation > verticalLimit || yTranslation < (verticalLimit * -1.0){
+//            print("uo or down")
+//            
+//            verticalConstraint.constant = originalConstant + logConstraintValueForYPosition(yTranslation)
+//        }
+        
+        
+        //If the view is dragged beyond the verticalLimit (Up or down)
         //too low
         if yTranslation > verticalLimit {
             verticalConstraint.constant = originalConstant + logConstraintValueForYPosition(yTranslation)
