@@ -27,13 +27,15 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     func barcelonetaDidMovedUp(){}
     func barcelonetaDidMovedDown(){}
     func barcelonetaDidRestore(){}
+    
     func barcelonetaDidChangeValue(view:Barceloneta,value:Double){
+//        print("new value \(value)")
         valueLabel.text = "\(value)"
     }
+    
     func barcelonetaDidRelease(view:Barceloneta){
         print("the user released la barceloneta")
     }
-    
     
     //MARK: -
     

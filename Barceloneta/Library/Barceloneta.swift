@@ -91,7 +91,6 @@ class Barceloneta: UIView {
     }
     
     func timerCalled() {
-//        print("timerCalled()")
         if movesUp {
             increment()
         }else{
@@ -104,27 +103,30 @@ class Barceloneta: UIView {
     }
     
     private func increment(){
-        let newValue = value + incrementalValue
-        checkValueAndApply(newValue)
-        delegate?.barcelonetaDidChangeValue(self, value: value)
+        checkAndApply(value + incrementalValue)
     }
     
     private func decrement(){
-        let newValue = value - incrementalValue
-        checkValueAndApply(newValue)
-        delegate?.barcelonetaDidChangeValue(self, value: value)
+        checkAndApply(value - incrementalValue)
     }
     
-    private func checkValueAndApply(newValue:Double){
+    func checkAndApply(newValue:Double){
     
+        var checkedValue = value
+        
         if newValue > maximumValue{
-            value = loops ? minimumValue : maximumValue
+            checkedValue = loops ? minimumValue : maximumValue
         }
         else if newValue < minimumValue {
-            value = loops ? maximumValue : minimumValue
+            checkedValue = loops ? maximumValue : minimumValue
         }
         else {
-            value = newValue
+            checkedValue = newValue
+        }
+        
+        if value != checkedValue {
+            value = checkedValue
+            delegate?.barcelonetaDidChangeValue(self, value: value)
         }
     }
     
