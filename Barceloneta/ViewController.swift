@@ -19,6 +19,8 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         super.viewDidLoad()
     
         barcelonetaView.layer.cornerRadius = 3.0
+        barcelonetaView.incrementalValue = 1.0
+        barcelonetaView.incrementalSettings = [(range:0..<50,value:1.0),(range:50..<70,value:2.0),(range:70..<500,value:3.0)]
         barcelonetaView.makeVerticalElastic(barcelontaViewVerticalConstraint, delegate: self)
     }
 
@@ -35,6 +37,11 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     
     func barcelonetaDidRelease(view:Barceloneta){
         print("the user released la barceloneta")
+    }
+    
+    func barcelonetaDidReachNewIncrementalSetting(view:Barceloneta, incrementalSetting:(range:Range<Int>,value:Double)){
+//        print("reached !!")
+        print(incrementalSetting)
     }
     
     //MARK: -

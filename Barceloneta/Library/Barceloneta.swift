@@ -15,6 +15,7 @@ protocol BarcelonetaDelegate:class {
     func barcelonetaDidRestore()
     func barcelonetaDidChangeValue(view:Barceloneta,value:Double)
     func barcelonetaDidRelease(view:Barceloneta)
+    func barcelonetaDidReachNewIncrementalSetting(view:Barceloneta, incrementalSetting:(range:Range<Int>,value:Double))
 }
 
 class Barceloneta: UIView {
@@ -26,20 +27,35 @@ class Barceloneta: UIView {
     var minimumValue:Double = 0.0
     var maximumValue:Double = 50.0
     var timerInterval = 0.3
-    var incrementalSettings:[(range:Range<Int>,value:Double)] = [(range:0..<50,value:1.0),(range:50..<70,value:2.0),(range:70..<90,value:10.0),(range:90..<500,value:30.0)]
-    var incrementalValue:Double = 1.0
+    var incrementalSettings:[(range:Range<Int>,value:Double)] = [(range:0..<500,value:1.0)]
+    var originalIncrementalValue:Double?
+    var incrementalValue:Double?{
+        didSet{
+            if originalIncrementalValue == nil{
+                originalIncrementalValue = incrementalValue
+                print("did set original")
+            }
+        }
+    }
     
     //Internal varibles
     weak var delegate:BarcelonetaDelegate?
     private var percentage:Int = 100
     private var timer = NSTimer()
+    private var timerHasBeenCalledAtLeastOnce = false
     private var elasticPanGesture:UIPanGestureRecognizer! = nil
     private weak var verticalConstraint:NSLayoutConstraint! = nil
     private var originalConstant : CGFloat = 0.0
     private var movesUp = true
+    private var currentIncrementalSetting:(range:Range<Int>,value:Double)! = nil
     
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
         
+        //Check that the required settings are OK
+        if incrementalValue == nil{
+            print("CANNOT CONTINUE WITHOUT NO INCREMENTAL VALUE")
+            return
+        }
 //        print(incrementalSettings)
         
         self.delegate = delegate
@@ -55,6 +71,7 @@ class Barceloneta: UIView {
         
         if(sender.state == .Began){
             timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
+            timerHasBeenCalledAtLeastOnce = false
         }
         
         let yTranslation = sender.translationInView(self).y
@@ -84,8 +101,14 @@ class Barceloneta: UIView {
         }
         
         if(sender.state == UIGestureRecognizerState.Ended ){
+            currentIncrementalSetting = nil
             animateViewBackToOrigin()
             timer.invalidate()
+            //Allow a basic increment with a quick pan of the view
+            if !timerHasBeenCalledAtLeastOnce{
+                incrementalValue = originalIncrementalValue!
+                timerCalled()
+            }
         }
         
         let prct = Int(100.0 / (verticalLimit/verticalConstraint.constant))
@@ -93,12 +116,24 @@ class Barceloneta: UIView {
         //Find a setting matching the percentage
         let settings = incrementalSettings.filter({return $0.range ~= percentage})
         if settings.count == 1{
+            
+            if currentIncrementalSetting != nil{
+                if settings[0] != currentIncrementalSetting{
+                    delegate?.barcelonetaDidReachNewIncrementalSetting(self, incrementalSetting: settings[0])
+                }
+            }
+            
+            currentIncrementalSetting = settings[0]
+            
             //If a setting is found, the incremental value is applied
-            incrementalValue = settings[0].value
+            incrementalValue = currentIncrementalSetting.value
         }
     }
     
     func timerCalled() {
+        
+        timerHasBeenCalledAtLeastOnce = true
+        
         if movesUp {
             increment()
         }else{
@@ -111,11 +146,11 @@ class Barceloneta: UIView {
     }
     
     private func increment(){
-        checkAndApply(value + incrementalValue)
+        checkAndApply(value + incrementalValue!)
     }
     
     private func decrement(){
-        checkAndApply(value - incrementalValue)
+        checkAndApply(value - incrementalValue!)
     }
     
     func checkAndApply(newValue:Double){
@@ -139,7 +174,6 @@ class Barceloneta: UIView {
     }
     
     private func animateViewBackToOrigin() {
-        
         verticalConstraint.constant = originalConstant
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
