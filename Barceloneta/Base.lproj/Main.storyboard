@@ -17,6 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSX-K7-b04">
+                                <rect key="frame" x="228" y="170.5" width="144" height="60.5"/>
+                                <string key="text">Drag this view
+⇡ or ⇣
+to change the value</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWg-BY-ghn" customClass="Barceloneta" customModule="Barceloneta" customModuleProvider="target">
                                 <rect key="frame" x="200" y="275" width="200" height="50"/>
                                 <subviews>
@@ -41,6 +50,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pWg-BY-ghn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EGn-v2-7FZ"/>
+                            <constraint firstItem="eSX-K7-b04" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bH6-XX-rmx"/>
+                            <constraint firstItem="eSX-K7-b04" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="cBB-Qv-znR"/>
                             <constraint firstItem="pWg-BY-ghn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jju-hl-2Dc"/>
                         </constraints>
                     </view>
@@ -52,6 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="459" y="202"/>
         </scene>
     </scenes>
 </document>
