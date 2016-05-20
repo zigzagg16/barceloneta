@@ -33,7 +33,6 @@ class Barceloneta: UIView {
         didSet{
             if originalIncrementalValue == nil{
                 originalIncrementalValue = incrementalValue
-                print("did set original")
             }
         }
     }
