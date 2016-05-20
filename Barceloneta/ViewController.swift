@@ -42,6 +42,8 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     
     func barcelonetaDidRelease(view:Barceloneta){
         //the user released la barceloneta
+        //Resset to default color
+        animateBarcelonetaBackgroundColor(getColorForMinimalRange(0))
     }
     
     func barcelonetaDidReachNewIncrementalSetting(view:Barceloneta, incrementalSetting:(range:Range<Int>,value:Double)){
