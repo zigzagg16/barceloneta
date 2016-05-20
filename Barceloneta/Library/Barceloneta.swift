@@ -100,27 +100,14 @@ class Barceloneta: UIView {
             verticalConstraint.constant = originalConstant + yTranslation
         }
         
-        if(sender.state == UIGestureRecognizerState.Ended ){
-            currentIncrementalSetting = nil
-            animateViewBackToOrigin()
-            timer.invalidate()
-            //Allow a basic increment with a quick pan of the view
-            if !timerHasBeenCalledAtLeastOnce{
-                incrementalValue = originalIncrementalValue!
-                timerCalled()
-            }
-        }
-        
         let prct = Int(100.0 / (verticalLimit/verticalConstraint.constant))
         percentage = prct < 0 ? prct * -1 : prct
         //Find a setting matching the percentage
         let settings = incrementalSettings.filter({return $0.range ~= percentage})
         if settings.count == 1{
             
-            if currentIncrementalSetting != nil{
-                if settings[0] != currentIncrementalSetting{
-                    delegate?.barcelonetaDidReachNewIncrementalSetting(self, incrementalSetting: settings[0])
-                }
+            if currentIncrementalSetting == nil || settings[0] != currentIncrementalSetting{
+                delegate?.barcelonetaDidReachNewIncrementalSetting(self, incrementalSetting: settings[0])
             }
             
             currentIncrementalSetting = settings[0]
@@ -128,12 +115,22 @@ class Barceloneta: UIView {
             //If a setting is found, the incremental value is applied
             incrementalValue = currentIncrementalSetting.value
         }
+        
+        if(sender.state == UIGestureRecognizerState.Ended ){
+            currentIncrementalSetting = nil
+            timer.invalidate()
+            animateViewBackToOrigin()
+            //Allow a basic increment with a quick pan of the view
+            if !timerHasBeenCalledAtLeastOnce{
+                //Set to the original incremental value
+                incrementalValue = originalIncrementalValue!
+                timerCalled()
+            }
+        }
     }
     
     func timerCalled() {
-        
         timerHasBeenCalledAtLeastOnce = true
-        
         if movesUp {
             increment()
         }else{
