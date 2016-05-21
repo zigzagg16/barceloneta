@@ -32,9 +32,18 @@ class ViewController: UIViewController, BarcelonetaDelegate {
 
     //MARK: - BarcelonetaDelegate
     
-    func barcelonetaDidMovedUp(){}
-    func barcelonetaDidMovedDown(){}
-    func barcelonetaDidRestore(){}
+    func barcelonetaDidMovedUp(view: Barceloneta) {
+        
+    }
+    func barcelonetaDidMovedDown(view: Barceloneta) {
+        
+    }
+    func barcelonetaDidRestore(view: Barceloneta) {
+        
+    }
+    func barcelonetaDidStartMoving(view: Barceloneta) {
+        
+    }
     
     func barcelonetaDidChangeValue(view:Barceloneta,value:Double){
         valueLabel.text = "\(Int(value))"
