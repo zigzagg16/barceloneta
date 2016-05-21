@@ -10,9 +10,10 @@
 import UIKit
 
 protocol BarcelonetaDelegate:class {
-    func barcelonetaDidMovedUp()
-    func barcelonetaDidMovedDown()
-    func barcelonetaDidRestore()
+    func barcelonetaDidStartMoving(view:Barceloneta)
+    func barcelonetaDidMovedUp(view:Barceloneta)
+    func barcelonetaDidMovedDown(view:Barceloneta)
+    func barcelonetaDidRestore(view:Barceloneta)
     func barcelonetaDidChangeValue(view:Barceloneta,value:Double)
     func barcelonetaDidRelease(view:Barceloneta)
     func barcelonetaDidReachNewIncrementalSetting(view:Barceloneta, incrementalSetting:(range:Range<Int>,value:Double))
@@ -55,8 +56,6 @@ class Barceloneta: UIView {
             print("CANNOT CONTINUE WITHOUT NO INCREMENTAL VALUE")
             return
         }
-//        print(incrementalSettings)
-        
         self.delegate = delegate
         originalConstant = verticalConstraint.constant
         self.verticalConstraint = verticalConstraint
@@ -69,6 +68,7 @@ class Barceloneta: UIView {
     func panned(sender: UIPanGestureRecognizer) {
         
         if(sender.state == .Began){
+            delegate?.barcelonetaDidStartMoving(self)
             timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
             timerHasBeenCalledAtLeastOnce = false
         }
@@ -118,13 +118,13 @@ class Barceloneta: UIView {
         if(sender.state == UIGestureRecognizerState.Ended ){
             currentIncrementalSetting = nil
             timer.invalidate()
-            animateViewBackToOrigin()
+            //Set to the original incremental value
+            incrementalValue = originalIncrementalValue!
             //Allow a basic increment with a quick pan of the view
             if !timerHasBeenCalledAtLeastOnce{
-                //Set to the original incremental value
-                incrementalValue = originalIncrementalValue!
                 timerCalled()
             }
+            animateViewBackToOrigin()
         }
     }
     
@@ -174,8 +174,8 @@ class Barceloneta: UIView {
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.superview!.layoutIfNeeded()
-            }, completion: nil)
-        
-        delegate?.barcelonetaDidRelease(self)
+        }) { _ in
+            self.delegate?.barcelonetaDidRelease(self)
+        }
     }
 }
