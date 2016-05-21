@@ -41,7 +41,7 @@ class Barceloneta: UIView {
     //Internal varibles
     weak var delegate:BarcelonetaDelegate?
     private var percentage:Int = 100
-    private var timer = NSTimer()
+    private var timers = [NSTimer]()
     private var timerHasBeenCalledAtLeastOnce = false
     private var elasticPanGesture:UIPanGestureRecognizer! = nil
     private weak var verticalConstraint:NSLayoutConstraint! = nil
@@ -69,7 +69,9 @@ class Barceloneta: UIView {
         
         if(sender.state == .Began){
             delegate?.barcelonetaDidStartMoving(self)
-            timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
+            //The first timer, that should only be invalidated when the view is released
+            let timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
+            timers.append(timer)
             timerHasBeenCalledAtLeastOnce = false
         }
         
@@ -117,7 +119,7 @@ class Barceloneta: UIView {
         
         if(sender.state == UIGestureRecognizerState.Ended ){
             currentIncrementalSetting = nil
-            timer.invalidate()
+            invalidateTimers()
             //Set to the original incremental value
             incrementalValue = originalIncrementalValue!
             //Allow a basic increment with a quick pan of the view
@@ -126,6 +128,16 @@ class Barceloneta: UIView {
             }
             animateViewBackToOrigin()
         }
+    }
+    
+    private func invalidateTimers(){
+     
+        for timer in timers{
+            timer.invalidate()
+        }
+        timers.removeAll()
+        print("timers invalidated")
+        print(timers)
     }
     
     func timerCalled() {
