@@ -20,7 +20,11 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     
         barcelonetaView.layer.cornerRadius = 3.0
         barcelonetaView.incrementalValue = 1.0
-        barcelonetaView.incrementalSettings = [(range:0..<70,value:1.0),(range:70..<120,value:2.0),(range:120..<500,value:3.0)]
+        barcelonetaView.timerSettings = [
+            (range:0..<70,timer:0.3,increment:1.0),
+            (range:70..<120,timer:0.2,increment:2.0),
+            (range:120..<500,timer:0.1,increment:3.0)
+        ]
         barcelonetaView.makeVerticalElastic(barcelontaViewVerticalConstraint, delegate: self)
     }
     
@@ -55,8 +59,9 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         animateBarcelonetaBackgroundColor(getColorForMinimalRange(0))
     }
     
-    func barcelonetaDidReachNewIncrementalSetting(view:Barceloneta, incrementalSetting:(range:Range<Int>,value:Double)){
-        let color = getColorForMinimalRange(incrementalSetting.range.startIndex)
+    
+    func barcelonetaDidReachNewTimerSetting(view:Barceloneta, setting:(range:Range<Int>,timer:Double,increment:Double)){
+        let color = getColorForMinimalRange(setting.range.startIndex)
         animateBarcelonetaBackgroundColor(color)
     }
     
