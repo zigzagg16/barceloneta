@@ -19,7 +19,6 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         super.viewDidLoad()
     
         barcelonetaView.layer.cornerRadius = 3.0
-        barcelonetaView.incrementalValue = 1.0
         barcelonetaView.timerSettings = [
             (range:0..<70,timer:0.3,increment:1.0),
             (range:70..<120,timer:0.2,increment:2.0),

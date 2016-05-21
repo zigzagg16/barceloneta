@@ -29,17 +29,10 @@ class Barceloneta: UIView {
     var maximumValue:Double = 50.0
     var timerInterval = 0.3
     var timerSettings:[(range:Range<Int>,timer:Double,increment:Double)]?
-    var originalIncrementalValue:Double?
-    var incrementalValue:Double?{
-        didSet{
-            if originalIncrementalValue == nil{
-                originalIncrementalValue = incrementalValue
-            }
-        }
-    }
+    weak var delegate:BarcelonetaDelegate?
     
     //Internal varibles
-    weak var delegate:BarcelonetaDelegate?
+    private var incrementalValue:Double = 0.0
     private var percentage:Int = 100
     private var timer = NSTimer()
     private var timerHasBeenCalledAtLeastOnce = false
@@ -52,10 +45,11 @@ class Barceloneta: UIView {
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
         
         //Check that the required settings are OK
-        if incrementalValue == nil{
-            print("CANNOT CONTINUE WITHOUT NO INCREMENTAL VALUE")
+        if timerSettings == nil{
+            print("CANNOT CONTINUE WITHOUT TIMER SETTINGS")
             return
         }
+        setDefaultIntervalSetting()
         self.delegate = delegate
         originalConstant = verticalConstraint.constant
         self.verticalConstraint = verticalConstraint
@@ -103,8 +97,7 @@ class Barceloneta: UIView {
                 
                 delegate?.barcelonetaDidReachNewTimerSetting(self, setting: timerSetting[0])
                 
-                print("found timer setting")
-                invalidateTimer()
+                timer.invalidate()
                 
                 //First called to avoid waiting after invalidating timers
                 timerCalled()
@@ -120,9 +113,8 @@ class Barceloneta: UIView {
         
         if(sender.state == UIGestureRecognizerState.Ended ){
             currentTimerSetting = nil
-            invalidateTimer()
-            //Set to the original incremental value
-            incrementalValue = originalIncrementalValue!
+            timer.invalidate()
+            setDefaultIntervalSetting()
             //Allow a basic increment with a quick pan of the view
             if !timerHasBeenCalledAtLeastOnce{
                 timerCalled()
@@ -131,15 +123,15 @@ class Barceloneta: UIView {
         }
     }
     
+    
+    ///Set to the original incremental value
+    private func setDefaultIntervalSetting(){
+        incrementalValue = timerSettings![0].increment
+    }
+    
     private func addTimer(interval:Double){
         
         timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
-    }
-    
-    private func invalidateTimer(){
-     
-        timer.invalidate()
-        print("timers invalidated")
     }
     
     func timerCalled() {
@@ -156,11 +148,11 @@ class Barceloneta: UIView {
     }
     
     private func increment(){
-        checkAndApply(value + incrementalValue!)
+        checkAndApply(value + incrementalValue)
     }
     
     private func decrement(){
-        checkAndApply(value - incrementalValue!)
+        checkAndApply(value - incrementalValue)
     }
     
     func checkAndApply(newValue:Double){
@@ -186,10 +178,12 @@ class Barceloneta: UIView {
     private func animateViewBackToOrigin() {
         verticalConstraint.constant = originalConstant
         
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+        self.delegate?.barcelonetaDidRelease(self)
+        
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.superview!.layoutIfNeeded()
         }) { _ in
-            self.delegate?.barcelonetaDidRelease(self)
+            
         }
     }
 }
