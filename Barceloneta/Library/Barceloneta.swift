@@ -1,11 +1,28 @@
 //
-//  Barceloneta.swift
+// Barceloneta.swift
 //
-//  Created by Arnaud Schloune on 17/05/16.
-//  Copyright © 2016 Arnaud Schloune. All rights reserved.
+// Created by Arnaud Schloune on 17/05/16.
+// The MIT License (MIT)
 //
-
-//Some parts are based on : https://github.com/Produkt/RubberBandEffect
+// Copyright © 2016 Arnaud Schloune. All rights reserved.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import UIKit
 
@@ -22,13 +39,11 @@ protocol BarcelonetaDelegate:class {
 class Barceloneta: UIView {
     //Configuration variables
     var loops = true
-    var initialValue = 0
     var verticalLimit:CGFloat = 50.0
     var value:Double = 0.0
     var minimumValue:Double = 0.0
     var maximumValue:Double = 50.0
-    var timerInterval = 0.3
-    var timerSettings:[(range:Range<Int>,timer:Double,increment:Double)]?
+    var timerSettings:[(range:Range<Int>,timer:Double,increment:Double)] = []
     weak var delegate:BarcelonetaDelegate?
     
     //Internal varibles
@@ -45,7 +60,7 @@ class Barceloneta: UIView {
     func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
         
         //Check that the required settings are OK
-        if timerSettings == nil{
+        if timerSettings.count == 0{
             print("CANNOT CONTINUE WITHOUT TIMER SETTINGS")
             return
         }
@@ -63,8 +78,8 @@ class Barceloneta: UIView {
         
         if(sender.state == .Began){
             delegate?.barcelonetaDidStartMoving(self)
-            //The first timer, that should only be invalidated when the view is released
-            addTimer(timerInterval)
+            //The first set of the timer
+            addTimer(timerSettings[0].timer)
             timerHasBeenCalledAtLeastOnce = false
         }
         
@@ -89,7 +104,7 @@ class Barceloneta: UIView {
         percentage = prct < 0 ? prct * -1 : prct
 
         //Find a timer setting matching the percentage
-        let timerSetting = timerSettings!.filter({return $0.range ~= percentage})
+        let timerSetting = timerSettings.filter({return $0.range ~= percentage})
         
         if timerSetting.count == 1{
                         
@@ -126,7 +141,7 @@ class Barceloneta: UIView {
     
     ///Set to the original incremental value
     private func setDefaultIntervalSetting(){
-        incrementalValue = timerSettings![0].increment
+        incrementalValue = timerSettings[0].increment
     }
     
     private func addTimer(interval:Double){
