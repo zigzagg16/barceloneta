@@ -35,15 +35,6 @@ class ViewController: UIViewController, BarcelonetaDelegate {
 
     //MARK: - BarcelonetaDelegate
     
-    func barcelonetaDidMovedUp(view: Barceloneta) {
-        
-    }
-    func barcelonetaDidMovedDown(view: Barceloneta) {
-        
-    }
-    func barcelonetaDidRestore(view: Barceloneta) {
-        
-    }
     func barcelonetaDidStartMoving(view: Barceloneta) {
         
     }
