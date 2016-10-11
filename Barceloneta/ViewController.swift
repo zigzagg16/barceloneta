@@ -27,7 +27,7 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         barcelonetaView.makeVerticalElastic(barcelontaViewVerticalConstraint, delegate: self)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         //Set the default background color
         animateBarcelonetaBackgroundColor(getColorForMinimalRange(0))
         barcelonetaDidChangeValue(barcelonetaView, value: 0)
@@ -35,27 +35,27 @@ class ViewController: UIViewController, BarcelonetaDelegate {
 
     //MARK: - BarcelonetaDelegate
     
-    func barcelonetaDidStartMoving(view: Barceloneta) {
+    func barcelonetaDidStartMoving(_ view: Barceloneta) {
         
     }
     
-    func barcelonetaDidChangeValue(view:Barceloneta,value:Double){
+    func barcelonetaDidChangeValue(_ view:Barceloneta,value:Double){
         valueLabel.text = "\(Int(value))"
     }
     
-    func barcelonetaDidRelease(view:Barceloneta){
+    func barcelonetaDidRelease(_ view:Barceloneta){
         //the user released la barceloneta
         //Resset to default color
         animateBarcelonetaBackgroundColor(getColorForMinimalRange(0))
     }
     
     
-    func barcelonetaDidReachNewTimerSetting(view:Barceloneta, setting:(range:Range<Int>,timer:Double,increment:Double)){
+    func barcelonetaDidReachNewTimerSetting(_ view:Barceloneta, setting:(range:CountableRange<Int>,timer:Double,increment:Double)){
         let color = getColorForMinimalRange(setting.range.startIndex)
         animateBarcelonetaBackgroundColor(color)
     }
     
-    private func getColorForMinimalRange(range:Int) -> UIColor{
+    fileprivate func getColorForMinimalRange(_ range:Int) -> UIColor{
         
         //Green
         var color = UIColor(red:0.22, green:0.80, blue:0.46, alpha:1.00)
@@ -73,14 +73,14 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         return color
     }
     
-    private func animateBarcelonetaBackgroundColor(color:UIColor){
-        UIView.animateWithDuration(0.3, animations: { 
+    fileprivate func animateBarcelonetaBackgroundColor(_ color:UIColor){
+        UIView.animate(withDuration: 0.3, animations: { 
         
             self.barcelonetaView.backgroundColor = color
             
-            }) { (finished) in
+            }, completion: { (finished) in
                 
-        }
+        }) 
         
     }
     
