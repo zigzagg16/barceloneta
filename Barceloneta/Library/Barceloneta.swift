@@ -29,14 +29,21 @@ import UIKit
 ///Protocol for Barceloneta events
 protocol BarcelonetaDelegate:class {
     ///Called when the user started dragging the view
-    func barcelonetaDidStartMoving(view:Barceloneta)
+    func barcelonetaDidStartMoving(_ view:Barceloneta)
     ///Called when the value changed
-    func barcelonetaDidChangeValue(view:Barceloneta,value:Double)
+    func barcelonetaDidChangeValue(_ view:Barceloneta,value:Double)
     ///Called when the user released the view
-    func barcelonetaDidRelease(view:Barceloneta)
+    func barcelonetaDidRelease(_ view:Barceloneta)
     ///Called when the view reached a new setting (and the setting has been applied)
-    func barcelonetaDidReachNewTimerSetting(view:Barceloneta, setting:(range:Range<Int>,timer:Double,increment:Double))
+    func barcelonetaDidReachNewTimerSetting(_ view:Barceloneta, setting:(range:CountableRange<Int>,timer:Double,increment:Double))
 }
+
+enum axis {
+    case x
+    case y
+}
+
+typealias timerSetting = (range:CountableRange<Int>,timer:Double,increment:Double)
 
 ///The Barceloneta class
 class Barceloneta: UIView {
@@ -52,39 +59,42 @@ class Barceloneta: UIView {
     ///The maximal value
     var maximumValue:Double = 50.0
     ///Timer and increment settings
-    var timerSettings:[(range:Range<Int>,timer:Double,increment:Double)] = []
+    var timerSettings:[timerSetting] = []
     ///The delegate, to receive events
     weak var delegate:BarcelonetaDelegate?
+    ///The axis on which the view can be dragged
+    var axis:axis = .y
     
     //Internal varibles
-    private var incrementalValue:Double = 0.0
-    private var percentage:Int = 100
-    private var timer = NSTimer()
-    private var timerHasBeenCalledAtLeastOnce = false
-    private var elasticPanGesture:UIPanGestureRecognizer! = nil
-    private weak var verticalConstraint:NSLayoutConstraint! = nil
-    private var originalConstant : CGFloat = 0.0
-    private var movesUp = true
-    private var currentTimerSetting:(range:Range<Int>,timer:Double,increment:Double)! = nil
-    
+    fileprivate var incrementalValue:Double = 0.0
+    fileprivate var percentage:Int = 100
+    fileprivate var timer = Timer()
+    fileprivate var timerHasBeenCalledAtLeastOnce = false
+    fileprivate var elasticPanGesture:UIPanGestureRecognizer! = nil
+    fileprivate weak var moveConstraint:NSLayoutConstraint! = nil
+    fileprivate var originalConstant : CGFloat = 0.0
+    fileprivate var movesUp = true
+    fileprivate var currentTimerSetting:timerSetting! = nil
     
     /**
         Initializes the gesture
         - parameters:
-          - verticalConstraint: The vertical constraint attached to the Barceloneta view
+          - constraint: The constraint attached to the Barceloneta view
+          - axis: The axis : .x or .y
           - delegate: The object receiving events for the view
      */
-    func makeVerticalElastic(verticalConstraint:NSLayoutConstraint, delegate: BarcelonetaDelegate){
+    func makeElastic(withConstraint constraint:NSLayoutConstraint, onAxis axis:axis, andDelegate delegate: BarcelonetaDelegate){
         
         //Check that the required settings are OK
-        if timerSettings.count == 0{
+        if timerSettings.count == 0 {
             print("CANNOT CONTINUE WITHOUT TIMER SETTINGS")
             return
         }
         setDefaultIntervalSetting()
+        self.axis = axis
         self.delegate = delegate
-        originalConstant = verticalConstraint.constant
-        self.verticalConstraint = verticalConstraint
+        self.moveConstraint = constraint
+        self.originalConstant = moveConstraint.constant
         if elasticPanGesture == nil {
             elasticPanGesture = UIPanGestureRecognizer(target: self, action: #selector(Barceloneta.panned(_:)))
             addGestureRecognizer(elasticPanGesture)
@@ -92,33 +102,33 @@ class Barceloneta: UIView {
     }
     
     ///Called when the view moves (dragged by the user)
-    func panned(sender: UIPanGestureRecognizer) {
+    func panned(_ sender: UIPanGestureRecognizer) {
         
-        if(sender.state == .Began){
+        if(sender.state == .began){
             delegate?.barcelonetaDidStartMoving(self)
             //The first set of the timer
             addTimer(timerSettings[0].timer)
             timerHasBeenCalledAtLeastOnce = false
         }
         
-        let yTranslation = sender.translationInView(self).y
+        let translation = self.axis == .y ? sender.translation(in: self).y : sender.translation(in: self).x
         
         //If ! movesUp, consider that the view moves down
-        movesUp = yTranslation < 0
+        movesUp = self.axis == .y ? (translation < 0) : (translation > 0)
         
         //If the view is dragged beyond the verticalLimit (Up or down)
         //too low
-        if yTranslation > verticalLimit {
-            verticalConstraint.constant = originalConstant + logConstraintValueForYPosition(yTranslation)
+        if translation > verticalLimit {
+            moveConstraint.constant = originalConstant + logConstraintValueForYPosition(translation)
         } //Too high
-        else if yTranslation < (verticalLimit * -1.0){
-            verticalConstraint.constant = originalConstant + ((logConstraintValueForYPosition(yTranslation * -1)) * -1)
+        else if translation < (verticalLimit * -1.0){
+            moveConstraint.constant = originalConstant + ((logConstraintValueForYPosition(translation * -1)) * -1)
         }
         else {
-            verticalConstraint.constant = originalConstant + yTranslation
+            moveConstraint.constant = originalConstant + translation
         }
         
-        let prct = Int(100.0 / (verticalLimit/verticalConstraint.constant))
+        let prct = Int(100.0 / (verticalLimit/moveConstraint.constant))
         percentage = prct < 0 ? prct * -1 : prct
 
         //Find a timer setting matching the percentage
@@ -144,7 +154,7 @@ class Barceloneta: UIView {
             incrementalValue = currentTimerSetting.increment
         }
         
-        if(sender.state == UIGestureRecognizerState.Ended ){
+        if(sender.state == UIGestureRecognizerState.ended ){
             currentTimerSetting = nil
             timer.invalidate()
             setDefaultIntervalSetting()
@@ -158,7 +168,7 @@ class Barceloneta: UIView {
     
     
     ///Set to the original incremental value
-    private func setDefaultIntervalSetting(){
+    fileprivate func setDefaultIntervalSetting(){
         incrementalValue = timerSettings[0].increment
     }
     
@@ -167,8 +177,8 @@ class Barceloneta: UIView {
         - parameters:
           - interval: The double interval for executing the timer
      */
-    private func addTimer(interval:Double){
-        timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
+    fileprivate func addTimer(_ interval:Double){
+        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(Barceloneta.timerCalled), userInfo: nil, repeats: true);
     }
     
     ///Increment/decrement depending if movesUp or not
@@ -187,17 +197,17 @@ class Barceloneta: UIView {
           - yPosition: the position of the view
         - returns: The updated position for the rubber effect
      */
-    private func logConstraintValueForYPosition(yPosition : CGFloat) -> CGFloat {
+    fileprivate func logConstraintValueForYPosition(_ yPosition : CGFloat) -> CGFloat {
         return verticalLimit * (1 + log10(yPosition/verticalLimit))
     }
     
     ///Increment the value
-    private func increment(){
+    fileprivate func increment(){
         checkAndApply(value + incrementalValue)
     }
     
     ///Decrement the value
-    private func decrement(){
+    fileprivate func decrement(){
         checkAndApply(value - incrementalValue)
     }
     
@@ -206,7 +216,7 @@ class Barceloneta: UIView {
         - parameters:
           - newValue: The value to check and apply
      */
-    func checkAndApply(newValue:Double){
+    func checkAndApply(_ newValue:Double){
     
         var checkedValue = value
         
@@ -227,12 +237,12 @@ class Barceloneta: UIView {
     }
     
     ///Restore the view to the original position with animation
-    private func animateViewBackToOrigin() {
-        verticalConstraint.constant = originalConstant
+    fileprivate func animateViewBackToOrigin() {
+        moveConstraint.constant = originalConstant
         
         self.delegate?.barcelonetaDidRelease(self)
         
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 25, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
             self.superview!.layoutIfNeeded()
         }) { _ in
             
