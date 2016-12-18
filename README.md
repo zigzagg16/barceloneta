@@ -19,7 +19,7 @@ Barceloneta is the right way to increment/decrement values with a simple gesture
 
 - Autolayout
 - iOS 8.0+
-- Swift 2
+- Swift 3.0
 - Xcode 7.0 or higher
 
 ## Communication
