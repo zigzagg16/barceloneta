@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,29 +18,29 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSX-K7-b04">
-                                <rect key="frame" x="228" y="170.5" width="144" height="60.5"/>
+                                <rect key="frame" x="128.5" y="209" width="118.5" height="50"/>
                                 <string key="text">Drag this view
 ⇡ or ⇣
 to change the value</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWg-BY-ghn" customClass="Barceloneta" customModule="Barceloneta" customModuleProvider="target">
-                                <rect key="frame" x="200" y="275" width="200" height="50"/>
+                                <rect key="frame" x="88" y="309" width="200" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJ2-FQ-Wer">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="xJ2-FQ-Wer" firstAttribute="leading" secondItem="pWg-BY-ghn" secondAttribute="leading" id="1ac-lk-Ym4"/>
                                     <constraint firstAttribute="bottom" secondItem="xJ2-FQ-Wer" secondAttribute="bottom" id="Fhw-vw-5xp"/>
@@ -46,18 +50,51 @@ to change the value</string>
                                     <constraint firstItem="xJ2-FQ-Wer" firstAttribute="top" secondItem="pWg-BY-ghn" secondAttribute="top" id="uNN-Tn-yjn"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3MU-su-DZd">
+                                <rect key="frame" x="110" y="161" width="155" height="29"/>
+                                <segments>
+                                    <segment title="Horizontal"/>
+                                    <segment title="Vertical"/>
+                                </segments>
+                                <color key="tintColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changedAxis:" destination="BYZ-38-t0r" eventType="valueChanged" id="daG-dX-cbc"/>
+                                </connections>
+                            </segmentedControl>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1m-xA-zOm">
+                                <rect key="frame" x="183" y="110" width="51" height="31"/>
+                                <connections>
+                                    <action selector="changedLooping:" destination="BYZ-38-t0r" eventType="valueChanged" id="D8e-AC-cXx"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-ls-tiH">
+                                <rect key="frame" x="145.5" y="111.5" width="32.5" height="28.5"/>
+                                <string key="text">loops
+values</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="eSX-K7-b04" firstAttribute="top" secondItem="3MU-su-DZd" secondAttribute="bottom" constant="20" id="9IV-lq-4fb"/>
                             <constraint firstItem="pWg-BY-ghn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EGn-v2-7FZ"/>
+                            <constraint firstItem="3MU-su-DZd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QyT-5b-9zj"/>
+                            <constraint firstItem="3MU-su-DZd" firstAttribute="top" secondItem="F1m-xA-zOm" secondAttribute="bottom" constant="20" id="Sad-ov-3gm"/>
                             <constraint firstItem="eSX-K7-b04" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bH6-XX-rmx"/>
                             <constraint firstItem="eSX-K7-b04" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="cBB-Qv-znR"/>
                             <constraint firstItem="pWg-BY-ghn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jju-hl-2Dc"/>
+                            <constraint firstItem="F1m-xA-zOm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="20" id="mWD-6i-e1B"/>
+                            <constraint firstItem="F1m-xA-zOm" firstAttribute="leading" secondItem="vaI-ls-tiH" secondAttribute="trailing" constant="5" id="mil-E6-M6f"/>
+                            <constraint firstItem="vaI-ls-tiH" firstAttribute="centerY" secondItem="F1m-xA-zOm" secondAttribute="centerY" id="yds-IQ-QWe"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barcelonetaView" destination="pWg-BY-ghn" id="beM-5W-0mc"/>
-                        <outlet property="barcelontaViewVerticalConstraint" destination="jju-hl-2Dc" id="pUA-6E-BzF"/>
+                        <outlet property="bcnViewHorizontalConstraint" destination="EGn-v2-7FZ" id="GN0-o5-fs3"/>
+                        <outlet property="bcnViewVerticalConstraint" destination="jju-hl-2Dc" id="MKz-OI-OER"/>
+                        <outlet property="infoLabel" destination="eSX-K7-b04" id="AWF-gv-hkg"/>
                         <outlet property="valueLabel" destination="xJ2-FQ-Wer" id="bFe-UT-F8c"/>
                     </connections>
                 </viewController>
