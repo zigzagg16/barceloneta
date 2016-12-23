@@ -9,10 +9,11 @@ Barceloneta is the right way to increment/decrement values with a simple gesture
 ## Features
 
 - [x] Customisation for timer and incremental values
+- [x] Easily customisable
+- [x] Horizontal/vertical mode
 - [x] Looping through values or not 
 - [x] Customizable dragging limit
 - [x] Minimal/maximal values
-- [x] Easily customisable
 - [x] [Complete Documentation](http://arn00s.github.io/barceloneta/)
 
 ## Requirements
@@ -68,7 +69,7 @@ barcelonetaView.timerSettings = [
             (range:70..<120,timer:0.2,increment:2.0),
             (range:120..<500,timer:0.1,increment:3.0)
         ]
-barcelonetaView.makeVerticalElastic(barcelontaViewVerticalConstraint, delegate: self)
+barcelonetaView.makeElastic(withConstraint: bcnViewVerticalConstraint, onAxis: axis, andDelegate: self)
 ```
 
 ### Configuration
@@ -123,7 +124,9 @@ Between `0` and `70%`, the timer interval for incrementation is `0.3 seconds`, a
 
 ## TODO
 
-- Support horizontal dragging
+- A more Swifty code
+- Unit testing
+- UI Testing
 
 ## Known issues
 
