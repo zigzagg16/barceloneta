@@ -38,8 +38,11 @@ protocol BarcelonetaDelegate:class {
     func barcelonetaDidReachNewTimerSetting(_ view:Barceloneta, setting:(range:CountableRange<Int>,timer:Double,increment:Double))
 }
 
+///Axis on which the view can be dragged
 enum axis {
+    ///Horizontal
     case x
+    ///Vertical
     case y
 }
 
