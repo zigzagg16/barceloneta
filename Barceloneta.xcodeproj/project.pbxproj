@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA2E96EC1E0D043300ED461B /* COSTouchVisualizerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2E96EB1E0D043300ED461B /* COSTouchVisualizerWindow.m */; };
 		FAB0B4391CEBB0BC00CE2FF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B4381CEBB0BC00CE2FF6 /* AppDelegate.swift */; };
 		FAB0B43B1CEBB0BC00CE2FF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0B43A1CEBB0BC00CE2FF6 /* ViewController.swift */; };
 		FAB0B43E1CEBB0BC00CE2FF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB0B43C1CEBB0BC00CE2FF6 /* Main.storyboard */; };
@@ -35,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA2E96E91E0D043200ED461B /* Barceloneta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Barceloneta-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA2E96EA1E0D043300ED461B /* COSTouchVisualizerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COSTouchVisualizerWindow.h; sourceTree = "<group>"; };
+		FA2E96EB1E0D043300ED461B /* COSTouchVisualizerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSTouchVisualizerWindow.m; sourceTree = "<group>"; };
 		FAB0B4351CEBB0BC00CE2FF6 /* Barceloneta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barceloneta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB0B4381CEBB0BC00CE2FF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB0B43A1CEBB0BC00CE2FF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +84,9 @@
 			isa = PBXGroup;
 			children = (
 				FAB0B4371CEBB0BC00CE2FF6 /* Barceloneta */,
+				FA2E96E91E0D043200ED461B /* Barceloneta-Bridging-Header.h */,
+				FA2E96EA1E0D043300ED461B /* COSTouchVisualizerWindow.h */,
+				FA2E96EB1E0D043300ED461B /* COSTouchVisualizerWindow.m */,
 				FAB0B44C1CEBB0BC00CE2FF6 /* BarcelonetaTests */,
 				FAB0B4571CEBB0BC00CE2FF6 /* BarcelonetaUITests */,
 				FAB0B4361CEBB0BC00CE2FF6 /* Products */,
@@ -199,12 +206,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Arnaud Schloune";
 				TargetAttributes = {
 					FAB0B4341CEBB0BC00CE2FF6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						DevelopmentTeam = HN4L38K7AC;
+						LastSwiftMigration = 0810;
 					};
 					FAB0B4481CEBB0BC00CE2FF6 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -273,6 +281,7 @@
 				FAB0B4681CEBB1E800CE2FF6 /* Barceloneta.swift in Sources */,
 				FAB0B43B1CEBB0BC00CE2FF6 /* ViewController.swift in Sources */,
 				FAB0B4391CEBB0BC00CE2FF6 /* AppDelegate.swift in Sources */,
+				FA2E96EC1E0D043300ED461B /* COSTouchVisualizerWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,8 +350,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -387,8 +398,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -407,6 +420,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -416,10 +430,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = HN4L38K7AC;
 				INFOPLIST_FILE = Barceloneta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.Barceloneta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Barceloneta-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -428,10 +446,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = HN4L38K7AC;
 				INFOPLIST_FILE = Barceloneta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.Barceloneta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Barceloneta-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
