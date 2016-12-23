@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSX-K7-b04">
-                                <rect key="frame" x="128.5" y="209" width="118.5" height="50"/>
+                                <rect key="frame" x="128" y="249" width="119" height="50"/>
                                 <string key="text">Drag this view
 ⇡ or ⇣
 to change the value</string>
@@ -50,44 +50,75 @@ to change the value</string>
                                     <constraint firstItem="xJ2-FQ-Wer" firstAttribute="top" secondItem="pWg-BY-ghn" secondAttribute="top" id="uNN-Tn-yjn"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3MU-su-DZd">
-                                <rect key="frame" x="110" y="161" width="155" height="29"/>
-                                <segments>
-                                    <segment title="Horizontal"/>
-                                    <segment title="Vertical"/>
-                                </segments>
-                                <color key="tintColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="changedAxis:" destination="BYZ-38-t0r" eventType="valueChanged" id="daG-dX-cbc"/>
-                                </connections>
-                            </segmentedControl>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1m-xA-zOm">
-                                <rect key="frame" x="183" y="110" width="51" height="31"/>
-                                <connections>
-                                    <action selector="changedLooping:" destination="BYZ-38-t0r" eventType="valueChanged" id="D8e-AC-cXx"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-ls-tiH">
-                                <rect key="frame" x="145.5" y="111.5" width="32.5" height="28.5"/>
-                                <string key="text">loops
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9s-IN-KGG">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hmd-7C-P5C">
+                                        <rect key="frame" x="192.5" y="0.0" width="172.5" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-ls-tiH">
+                                                <rect key="frame" x="52.5" y="11" width="33" height="29"/>
+                                                <string key="text">loops
 values</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1m-xA-zOm">
+                                                <rect key="frame" x="92.5" y="10" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="changedLooping:" destination="BYZ-38-t0r" eventType="valueChanged" id="D8e-AC-cXx"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="F1m-xA-zOm" firstAttribute="centerX" secondItem="Hmd-7C-P5C" secondAttribute="centerX" constant="30" id="0FV-wW-PVp"/>
+                                            <constraint firstItem="F1m-xA-zOm" firstAttribute="leading" secondItem="vaI-ls-tiH" secondAttribute="trailing" constant="7.5" id="PdA-h2-QRC"/>
+                                            <constraint firstItem="vaI-ls-tiH" firstAttribute="centerY" secondItem="F1m-xA-zOm" secondAttribute="centerY" id="PrL-cz-p6N"/>
+                                            <constraint firstItem="F1m-xA-zOm" firstAttribute="centerY" secondItem="Hmd-7C-P5C" secondAttribute="centerY" id="TIf-G6-AB7"/>
+                                        </constraints>
+                                    </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3MU-su-DZd">
+                                        <rect key="frame" x="10" y="11" width="172.5" height="29"/>
+                                        <segments>
+                                            <segment title="Horizontal"/>
+                                            <segment title="Vertical"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="changedAxis:" destination="BYZ-38-t0r" eventType="valueChanged" id="daG-dX-cbc"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="3MU-su-DZd" firstAttribute="width" secondItem="Hmd-7C-P5C" secondAttribute="width" id="5hf-oc-VFL"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hmd-7C-P5C" secondAttribute="bottom" id="AQd-rt-TZF"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hmd-7C-P5C" secondAttribute="trailing" constant="10" id="Gcf-z7-0ct"/>
+                                    <constraint firstAttribute="height" constant="50" id="cIF-4K-f4t"/>
+                                    <constraint firstItem="3MU-su-DZd" firstAttribute="centerY" secondItem="k9s-IN-KGG" secondAttribute="centerY" id="eDp-i2-KWj"/>
+                                    <constraint firstItem="Hmd-7C-P5C" firstAttribute="top" secondItem="k9s-IN-KGG" secondAttribute="top" id="kT5-y0-fKb"/>
+                                    <constraint firstItem="Hmd-7C-P5C" firstAttribute="leading" secondItem="3MU-su-DZd" secondAttribute="trailing" constant="10" id="pMT-IW-yLN"/>
+                                    <constraint firstItem="3MU-su-DZd" firstAttribute="leading" secondItem="k9s-IN-KGG" secondAttribute="leading" constant="10" id="sXW-LL-H22"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barceloneta_title" translatesAutoresizingMaskIntoConstraints="NO" id="P3o-HL-rWA">
+                                <rect key="frame" x="0.0" y="160" width="375" height="29"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eSX-K7-b04" firstAttribute="top" secondItem="3MU-su-DZd" secondAttribute="bottom" constant="20" id="9IV-lq-4fb"/>
                             <constraint firstItem="pWg-BY-ghn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EGn-v2-7FZ"/>
-                            <constraint firstItem="3MU-su-DZd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QyT-5b-9zj"/>
-                            <constraint firstItem="3MU-su-DZd" firstAttribute="top" secondItem="F1m-xA-zOm" secondAttribute="bottom" constant="20" id="Sad-ov-3gm"/>
+                            <constraint firstAttribute="trailing" secondItem="P3o-HL-rWA" secondAttribute="trailing" id="Kct-jN-8np"/>
                             <constraint firstItem="eSX-K7-b04" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bH6-XX-rmx"/>
-                            <constraint firstItem="eSX-K7-b04" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="cBB-Qv-znR"/>
+                            <constraint firstItem="eSX-K7-b04" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-60" id="cBB-Qv-znR"/>
+                            <constraint firstAttribute="trailing" secondItem="k9s-IN-KGG" secondAttribute="trailing" id="iMt-tr-99m"/>
+                            <constraint firstItem="eSX-K7-b04" firstAttribute="top" secondItem="P3o-HL-rWA" secondAttribute="bottom" constant="60" id="iQ7-e4-Amj"/>
                             <constraint firstItem="pWg-BY-ghn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jju-hl-2Dc"/>
-                            <constraint firstItem="F1m-xA-zOm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="20" id="mWD-6i-e1B"/>
-                            <constraint firstItem="F1m-xA-zOm" firstAttribute="leading" secondItem="vaI-ls-tiH" secondAttribute="trailing" constant="5" id="mil-E6-M6f"/>
-                            <constraint firstItem="vaI-ls-tiH" firstAttribute="centerY" secondItem="F1m-xA-zOm" secondAttribute="centerY" id="yds-IQ-QWe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="k9s-IN-KGG" secondAttribute="bottom" id="k1T-dU-tJZ"/>
+                            <constraint firstItem="P3o-HL-rWA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rCM-VB-CXq"/>
+                            <constraint firstItem="k9s-IN-KGG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sTM-HN-fZf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -100,7 +131,10 @@ values</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="459" y="202"/>
+            <point key="canvasLocation" x="458.39999999999998" y="201.94902548725639"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="barceloneta_title" width="248" height="29"/>
+    </resources>
 </document>

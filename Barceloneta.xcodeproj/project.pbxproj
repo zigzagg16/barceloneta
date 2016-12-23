@@ -204,6 +204,7 @@
 				TargetAttributes = {
 					FAB0B4341CEBB0BC00CE2FF6 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = HN4L38K7AC;
 						LastSwiftMigration = 0800;
 					};
 					FAB0B4481CEBB0BC00CE2FF6 = {
@@ -416,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = HN4L38K7AC;
 				INFOPLIST_FILE = Barceloneta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.Barceloneta;
@@ -428,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = HN4L38K7AC;
 				INFOPLIST_FILE = Barceloneta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.Barceloneta;
