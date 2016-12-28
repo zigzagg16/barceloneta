@@ -1,10 +1,13 @@
-Barceloneta
+barceloneta
 ===============
+
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/barceloneta.svg)](https://img.shields.io/cocoapods/v/barceloneta.svg)
+
+The right way to increment/decrement values
 
 ![](https://raw.githubusercontent.com/arn00s/barceloneta/master/img/barceloneta.gif)
 
-
-Barceloneta is the right way to increment/decrement values with a simple gesture on iOS
+barceloneta is the right way to increment/decrement values with a simple gesture on iOS
 
 ## Features
 
@@ -19,30 +22,38 @@ Barceloneta is the right way to increment/decrement values with a simple gesture
 ## Requirements
 
 - Autolayout
-- iOS 8.0+
-- Swift 3
-- Xcode 7.0 or higher
+- iOS 9.0+
+- Swift 3.0
+- Xcode 8.0 or higher
 
 ## Communication
 
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/Barceloneta). (Tag 'Barceloneta')
-- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/Barceloneta).
+- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/barceloneta). (Tag 'Barceloneta')
+- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/barceloneta).
 - If you **found a bug**, open an issue.
 - If you **have a feature request**, open an issue.
 - If you **want to contribute**, submit a pull request.
 - If you **use the control**, contact me to mention your app on this page.
 
-
 ## Installation
 
-### CocoaPods/Carthage
+### CocoaPods
+CariocaMenu is now available on [CocoaPods](http://cocoapods.org). 
+Simply add the following to your project Podfile, and you'll be good to go.
 
-Support for CocoaPods/Carthage is coming soon
+```ruby
+use_frameworks!
 
+pod 'barceloneta'
+```
+
+### Carthage
+
+Coming soon
 
 ### Manually
 
-You can integrate `Barceloneta` into your project manually.
+You can integrate `barceloneta` into your project manually.
 
 #### Source File
 
@@ -97,11 +108,11 @@ barcelonetaView.minimumValue = 0.0
 barcelonetaView.maximumValue = 50.0
 ```
 
-#### Vertical limit
+#### Dragging limit
 This value defines the dragging limit of your `barceloneta` object. If the user draggs the view higher than this limit, a rubber effect will apply. The view will go up/down slower than your finger.
 
 ```swift
-barcelonetaView.verticalLimit = 50.0
+barcelonetaView.draggingLimit = 50.0
 ```
 
 #### Timer Settings
@@ -111,7 +122,7 @@ It is required to have at least an object in the timer setting.
 
 Depending on the percentage, the matching settings will be applied.
 
-A deplacement of 100% corresponds to the verticalLimit.
+A deplacement of 100% corresponds to the draggingLimit.
 
 ```swift
 (range:0..<70,timer:0.3,increment:1.0)
@@ -121,6 +132,12 @@ This setting says that :
 Between `0` and `70%`, the timer interval for incrementation is `0.3 seconds`, and the value incremented is `1.0`.
 
 ![](https://raw.githubusercontent.com/arn00s/barceloneta/master/img/barceloneta_explanation.png)
+
+#### Crash when running the app ?
+
+If you installed `barceloneta` via CocoaPods and use it with Storyboard/xib, you may need to set the module :
+
+![](https://raw.githubusercontent.com/arn00s/barceloneta/master/img/custom-module-storyboard.png)
 
 ## TODO
 

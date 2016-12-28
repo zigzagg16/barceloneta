@@ -27,7 +27,7 @@
 import UIKit
 
 ///Protocol for Barceloneta events
-protocol BarcelonetaDelegate:class {
+public protocol BarcelonetaDelegate:class {
     ///Called when the user started dragging the view
     func barcelonetaDidStartMoving(_ view:Barceloneta)
     ///Called when the value changed
@@ -39,34 +39,34 @@ protocol BarcelonetaDelegate:class {
 }
 
 ///Axis on which the view can be dragged
-enum axis {
+public enum axis {
     ///Horizontal
     case x
     ///Vertical
     case y
 }
 
-typealias timerSetting = (range:CountableRange<Int>,timer:Double,increment:Double)
+public typealias timerSetting = (range:CountableRange<Int>,timer:Double,increment:Double)
 
 ///The Barceloneta class
-class Barceloneta: UIView {
+public class Barceloneta: UIView {
     //Configuration variables
     ///Values loop or not
-    var loops = true
-    ///The dragging vertical limit
-    var verticalLimit:CGFloat = 50.0
+    public var loops = true
+    ///The dragging limit
+    public var draggingLimit:CGFloat = 50.0
     ///The initial and current value
-    var value:Double = 0.0
+    public var value:Double = 0.0
     ///The minimal value
-    var minimumValue:Double = 0.0
+    public var minimumValue:Double = 0.0
     ///The maximal value
-    var maximumValue:Double = 50.0
+    public var maximumValue:Double = 50.0
     ///Timer and increment settings
-    var timerSettings:[timerSetting] = []
+    public var timerSettings:[timerSetting] = []
     ///The delegate, to receive events
     weak var delegate:BarcelonetaDelegate?
     ///The axis on which the view can be dragged
-    var axis:axis = .y
+    public var axis:axis = .y
     
     //Internal varibles
     fileprivate var incrementalValue:Double = 0.0
@@ -86,7 +86,7 @@ class Barceloneta: UIView {
           - axis: The axis : .x or .y
           - delegate: The object receiving events for the view
      */
-    func makeElastic(withConstraint constraint:NSLayoutConstraint, onAxis axis:axis, andDelegate delegate: BarcelonetaDelegate){
+    public func makeElastic(withConstraint constraint:NSLayoutConstraint, onAxis axis:axis, andDelegate delegate: BarcelonetaDelegate){
         
         //Check that the required settings are OK
         if timerSettings.count == 0 {
@@ -119,19 +119,19 @@ class Barceloneta: UIView {
         //If ! movesUp, consider that the view moves down
         movesUp = self.axis == .y ? (translation < 0) : (translation > 0)
         
-        //If the view is dragged beyond the verticalLimit (Up or down)
+        //If the view is dragged beyond the draggingLimit (Up or down)
         //too low
-        if translation > verticalLimit {
+        if translation > draggingLimit {
             moveConstraint.constant = originalConstant + logConstraintValueForYPosition(translation)
         } //Too high
-        else if translation < (verticalLimit * -1.0){
+        else if translation < (draggingLimit * -1.0){
             moveConstraint.constant = originalConstant + ((logConstraintValueForYPosition(translation * -1)) * -1)
         }
         else {
             moveConstraint.constant = originalConstant + translation
         }
         
-        let prct = Int(100.0 / (verticalLimit/moveConstraint.constant))
+        let prct = Int(100.0 / (draggingLimit/moveConstraint.constant))
         percentage = prct < 0 ? prct * -1 : prct
 
         //Find a timer setting matching the percentage
@@ -201,7 +201,7 @@ class Barceloneta: UIView {
         - returns: The updated position for the rubber effect
      */
     fileprivate func logConstraintValueForYPosition(_ yPosition : CGFloat) -> CGFloat {
-        return verticalLimit * (1 + log10(yPosition/verticalLimit))
+        return draggingLimit * (1 + log10(yPosition/draggingLimit))
     }
     
     ///Increment the value
