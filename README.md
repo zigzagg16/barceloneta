@@ -174,12 +174,3 @@ You're looking for an innovative way to increment/decrement values
 ## License
 
 Barceloneta is released under the MIT license. See LICENSE for details.
-
-
-# 👀 Check also
-
-🇧🇷 [**CariocaMenu**](https://github.com/arn00s/cariocamenu) 🇧🇷
-The fastest zero-tap iOS menu
-
-![](https://raw.githubusercontent.com/arn00s/cariocamenu/master/cariocamenu.gif)
-
