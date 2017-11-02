@@ -1,11 +1,9 @@
 clean: true
 author: Arnaud Schloune
-author_url: https://twitter.com/arnaud_momo
+author_url: https://twitter.com/mmommommomo
 github_url: https://github.com/arn00s/barceloneta
-github_file_prefix: 
-#module-version: 0.2
+github_file_prefix:
 module: Barceloneta
-#root-url: https://arn00s.github.io/barceloneta/
 min_acl: internal
 exclude: [
 	Barceloneta/AppDelegate.swift,
