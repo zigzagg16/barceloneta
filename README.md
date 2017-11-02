@@ -40,7 +40,7 @@ barceloneta is the right way to increment/decrement values with a simple gesture
 ## Installation
 
 ### CocoaPods
-CariocaMenu is now available on [CocoaPods](http://cocoapods.org). 
+Barceloneta is now available on [CocoaPods](http://cocoapods.org). 
 Simply add the following to your project Podfile, and you'll be good to go.
 
 ```ruby
@@ -78,11 +78,13 @@ barcelonetaView.loops = true
 barcelonetaView.minimumValue = 0.0
 barcelonetaView.maximumValue = 50.0
 barcelonetaView.timerSettings = [
-            (range:0..<70,timer:0.3,increment:1.0),
-            (range:70..<120,timer:0.2,increment:2.0),
-            (range:120..<500,timer:0.1,increment:3.0)
-        ]
-barcelonetaView.makeElastic(withConstraint: bcnViewVerticalConstraint, onAxis: axis, andDelegate: self)
+       (range: 0..<70, timer: 0.3, increment: 1.0),
+       (range: 70..<120, timer: 0.2, increment: 2.0),
+       (range: 120..<500, timer: 0.1, increment: 3.0)
+]
+barcelonetaView.makeElastic(withConstraint: bcnViewHorizontalConstraint,
+                                    onAxis: .horizontal,
+                               andDelegate: self)
 ```
 
 ### Configuration
@@ -127,7 +129,7 @@ Depending on the percentage, the matching settings will be applied.
 A deplacement of 100% corresponds to the draggingLimit.
 
 ```swift
-(range:0..<70,timer:0.3,increment:1.0)
+(range:0..<70, timer: 0.3, increment: 1.0)
 ```
 This setting says that :
 

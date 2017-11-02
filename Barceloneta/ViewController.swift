@@ -19,15 +19,15 @@ class ViewController: UIViewController, BarcelonetaDelegate {
         super.viewDidLoad()
         barcelonetaView.layer.cornerRadius = 6.0
         barcelonetaView.timerSettings = [
-            (range:0..<70, timer:0.3, increment:1.0),
-            (range:70..<120, timer:0.2, increment:2.0),
-            (range:120..<500, timer:0.1, increment:3.0)
+            (range: 0..<70, timer: 0.3, increment: 1.0),
+            (range: 70..<120, timer: 0.2, increment: 2.0),
+            (range: 120..<500, timer: 0.1, increment: 3.0)
         ]
         enable(withAxis: .horizontal)
     }
     override func viewWillAppear(_ animated: Bool) {
         //Set the default background color
-        animateBarcelonetaBackgroundColor(color(forMinimalRange: 0))
+        self.barcelonetaView.backgroundColor = color(forMinimalRange: 0)
         barcelonetaDidChangeValue(barcelonetaView, value: 0)
     }
 
@@ -41,11 +41,11 @@ class ViewController: UIViewController, BarcelonetaDelegate {
     func barcelonetaDidRelease(_ view: Barceloneta) {
         //the user released la barceloneta
         //Resset to default color
-        animateBarcelonetaBackgroundColor(color(forMinimalRange: 0))
+        self.barcelonetaView.backgroundColor = color(forMinimalRange: 0)
     }
 
     func barcelonetaDidReachNewTimerSetting(_ view: Barceloneta, setting: TimerSetting) {
-        animateBarcelonetaBackgroundColor(color(forMinimalRange: setting.range.startIndex))
+        self.barcelonetaView.backgroundColor = color(forMinimalRange: setting.range.startIndex)
     }
 
     ///Color for a minimal range
@@ -61,13 +61,6 @@ class ViewController: UIViewController, BarcelonetaDelegate {
             //Green
             return UIColor(red: 0.22, green: 0.80, blue: 0.46, alpha: 1.00)
         }
-    }
-
-    fileprivate func animateBarcelonetaBackgroundColor(_ color: UIColor) {
-        self.barcelonetaView.backgroundColor = .clear
-        UIView.animate(withDuration: 0.3, animations: {
-            self.barcelonetaView.backgroundColor = color
-            }, completion: nil)
     }
 
     // MARK: - Settings
