@@ -49,7 +49,7 @@ public enum Axis {
 public typealias TimerSetting = (range: CountableRange<Int>, timer: Double, increment: Double)
 
 ///The Barceloneta class
-public class Barceloneta: UIView {
+open class Barceloneta: UIView {
     //Configuration variables
     ///Values loop or not
     public var loops = true
