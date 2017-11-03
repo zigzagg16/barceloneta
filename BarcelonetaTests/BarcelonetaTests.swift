@@ -48,6 +48,19 @@ class BarcelonetaTests: XCTestCase {
         XCTAssertEqual(moving70, 70.0)
     }
 
+    func testBarceloneta_ShouldCalculateCorrectLogarithm() {
+        //Given
+        let limit: CGFloat = 40.0
+        //When
+        let log19 = bcn?.logarithm(limit, CGFloat(12.0))
+        let log15 = bcn?.logarithm(limit, CGFloat(10.0))
+        let log39 = bcn?.logarithm(limit, CGFloat(38.0))
+        //Then
+        XCTAssertEqual(log15!, CGFloat(15.917), accuracy: CGFloat(0.001))
+        XCTAssertEqual(log19!, CGFloat(19.084), accuracy: CGFloat(0.001))
+        XCTAssertEqual(log39!, CGFloat(39.108), accuracy: CGFloat(0.001))
+    }
+
     override func tearDown() {
         super.tearDown()
         bcn = nil
