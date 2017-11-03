@@ -77,13 +77,11 @@ open class Barceloneta: UIView {
     fileprivate var originalConstant: CGFloat = 0.0
     fileprivate var movesUp = true
     fileprivate var currentTimerSetting: TimerSetting! = nil
-    /**
-        Initializes the gesture
-        - parameters:
-          - constraint: The constraint attached to the Barceloneta view
-          - axis: The axis : .horizontal or .vertical
-          - delegate: The object receiving events for the view
-     */
+
+    ///Initializes the gesture
+    /// - Parameter constraint: The constraint attached to the Barceloneta view
+    /// - Parameter axis: The axis : .horizontal or .vertical
+    /// - Parameter delegate: The object receiving events for the view
     public func makeElastic(withConstraint constraint: NSLayoutConstraint,
                             onAxis axis: Axis,
                             andDelegate delegate: BarcelonetaDelegate) {
@@ -105,28 +103,20 @@ open class Barceloneta: UIView {
 
     ///Called when the view moves (dragged by the user)
     @objc func panned(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
+        if sender.state == .began, let beginTimerSeeting = firstTimerSetting {
             delegate?.barcelonetaDidStartMoving(self)
             //The first set of the timer
-            addTimer(timerSettings[0].timer)
+            addTimer(beginTimerSeeting.timer)
             timerHasBeenCalledAtLeastOnce = false
         }
 
-        let translation = self.axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x
+        let translationValue = self.axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x
         //If ! movesUp, consider that the view moves down
-        movesUp = self.axis == .vertical ? (translation < 0) : (translation > 0)
-        //If the view is dragged beyond the draggingLimit (Up or down)
-        //too low
-        if translation > draggingLimit {
-            moveConstraint.constant = originalConstant + logConstraintValueForYPosition(translation)
-        } else if translation < (draggingLimit * -1.0) {
-            moveConstraint.constant = originalConstant + ((logConstraintValueForYPosition(translation * -1)) * -1)
-        } else {
-            moveConstraint.constant = originalConstant + translation
-        }
-
-        let prct = Int(100.0 / (draggingLimit/moveConstraint.constant))
-        percentage = prct < 0 ? prct * -1 : prct
+        movesUp = self.axis == .vertical ? (translationValue < 0) : (translationValue > 0)
+        moveConstraint.constant = movingValue(translation: translationValue,
+                                              limit: draggingLimit,
+                                              constant: originalConstant)
+        percentage = percentage(limit: draggingLimit, constant: moveConstraint.constant)
 
         //Find a timer setting matching the percentage
         if let timerSetting = timerSettings.filter({return $0.range ~= percentage}).first {
@@ -154,15 +144,17 @@ open class Barceloneta: UIView {
             animateViewBackToOrigin()
         }
     }
+    ///Computed var returning the optional first TimerSetting in the list.
+    var firstTimerSetting: TimerSetting? {
+        return timerSettings.first
+    }
     ///Set to the original incremental value
     fileprivate func setDefaultIntervalSetting() {
         incrementalValue = timerSettings[0].increment
     }
-    /**
-        Sets the timer with the interval
-        - parameters:
-          - interval: The double interval for executing the timer
-     */
+
+    ///Sets the timer with the interval
+    /// - Parameter interval: The double interval for executing the timer
     fileprivate func addTimer(_ interval: Double) {
         timer = Timer.scheduledTimer(timeInterval: interval,
                                      target: self,
@@ -177,14 +169,39 @@ open class Barceloneta: UIView {
         movesUp ? increment() : decrement()
     }
 
-    /**
-        Calculate the constraint value for the rubber effect
-        - parameters:
-          - yPosition: the position of the view
-        - returns: The updated position for the rubber effect
-     */
-    fileprivate func logConstraintValueForYPosition(_ yPosition: CGFloat) -> CGFloat {
-        return draggingLimit * (1 + log10(yPosition/draggingLimit))
+    ///Calculates the percentage value of the move
+    /// - Parameter limit: The maximum dragging limit
+    /// - Parameter constant: The constraint's actual constant
+    /// - Returns: Int: The percentage value
+    func percentage(limit: CGFloat, constant: CGFloat) -> Int {
+        let prct = Int(100.0 / (limit / constant))
+        return prct < 0 ? prct * -1 : prct
+    }
+
+    ///Calculates the value to move the view
+    /// - Parameter translation: The gesture translation value
+    /// - Parameter limit: The maximum dragging limit
+    /// - Parameter constant: The constraint's actual constant
+    /// - Returns: CGFloat: The new value to apply to the constraint's constant.
+    func movingValue(translation: CGFloat, limit: CGFloat, constant: CGFloat) -> CGFloat {
+        //If the view is dragged beyond the draggingLimit (Up or down)
+        //too low
+        if translation > limit {
+            return constant + logarithm(limit, translation)
+        } else if translation < (limit * -1.0) {
+            return constant + (logarithm(limit, translation * -1) * -1)
+        } else {
+            return constant + translation
+        }
+    }
+
+    ///Calculate the value for the rubber effect
+    ///A user may have several memberships, but on different markets.
+    /// - Parameter limit: the dragging limit of the view
+    /// - Parameter yPosition: the position of the view
+    /// - Returns: CGFloat: The updated position for the rubber effect
+    fileprivate func logarithm(_ limit: CGFloat, _ yPosition: CGFloat) -> CGFloat {
+        return limit * (1 + log10(yPosition / limit))
     }
     ///Increment the value
     fileprivate func increment() {
@@ -194,11 +211,8 @@ open class Barceloneta: UIView {
     fileprivate func decrement() {
         checkAndApply(value - incrementalValue)
     }
-    /**
-     Checks what to do with the new value, depending if loops or not
-        - parameters:
-          - newValue: The value to check and apply
-     */
+    ///Checks what to do with the new value, depending if loops or not
+    /// - Parameter newValue: The value to check and apply
     func checkAndApply(_ newValue: Double) {
         var checkedValue = value
         if newValue > maximumValue {
