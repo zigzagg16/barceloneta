@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -57,7 +62,7 @@ to change the value</string>
                                         <rect key="frame" x="192.5" y="0.0" width="172.5" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-ls-tiH">
-                                                <rect key="frame" x="52.5" y="11" width="33" height="29"/>
+                                                <rect key="frame" x="52.5" y="11" width="32" height="29"/>
                                                 <string key="text">loops
 values</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
@@ -74,16 +79,17 @@ values</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="F1m-xA-zOm" firstAttribute="centerX" secondItem="Hmd-7C-P5C" secondAttribute="centerX" constant="30" id="0FV-wW-PVp"/>
-                                            <constraint firstItem="F1m-xA-zOm" firstAttribute="leading" secondItem="vaI-ls-tiH" secondAttribute="trailing" constant="7.5" id="PdA-h2-QRC"/>
+                                            <constraint firstItem="F1m-xA-zOm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vaI-ls-tiH" secondAttribute="trailing" constant="8" symbolic="YES" id="PdA-h2-QRC"/>
                                             <constraint firstItem="vaI-ls-tiH" firstAttribute="centerY" secondItem="F1m-xA-zOm" secondAttribute="centerY" id="PrL-cz-p6N"/>
                                             <constraint firstItem="F1m-xA-zOm" firstAttribute="centerY" secondItem="Hmd-7C-P5C" secondAttribute="centerY" id="TIf-G6-AB7"/>
+                                            <constraint firstItem="vaI-ls-tiH" firstAttribute="leading" secondItem="Hmd-7C-P5C" secondAttribute="leading" constant="52.5" id="yXv-Tp-ElU"/>
                                         </constraints>
                                     </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3MU-su-DZd">
                                         <rect key="frame" x="10" y="11" width="172.5" height="29"/>
                                         <segments>
-                                            <segment title="Horizontal"/>
                                             <segment title="Vertical"/>
+                                            <segment title="Horizontal"/>
                                         </segments>
                                         <color key="tintColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>

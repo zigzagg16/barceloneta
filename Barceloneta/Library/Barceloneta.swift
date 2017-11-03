@@ -50,7 +50,7 @@ public typealias TimerSetting = (range: CountableRange<Int>, timer: Double, incr
 
 ///The Barceloneta class
 open class Barceloneta: UIView {
-    //Configuration variables
+    // MARK: Configuration variables
     ///Values loop or not
     public var loops = true
     ///The dragging limit
@@ -67,8 +67,13 @@ open class Barceloneta: UIView {
     weak var delegate: BarcelonetaDelegate?
     ///The axis on which the view can be dragged
     public var axis: Axis = .vertical
-    //Internal varibles
-    fileprivate var incrementalValue: Double = 0.0
+    // MARK: Internal varibles
+    fileprivate var incrementalValue: Double {
+        guard let currentSetting = currentTimerSetting else {
+            return firstTimerSetting != nil ? firstTimerSetting!.increment : 0.0
+        }
+        return currentSetting.increment
+    }
     fileprivate var percentage: Int = 100
     fileprivate var timer = Timer()
     fileprivate var timerHasBeenCalledAtLeastOnce = false
@@ -77,25 +82,21 @@ open class Barceloneta: UIView {
     fileprivate var originalConstant: CGFloat = 0.0
     fileprivate var movesUp = true
     fileprivate var currentTimerSetting: TimerSetting! = nil
-    /**
-        Initializes the gesture
-        - parameters:
-          - constraint: The constraint attached to the Barceloneta view
-          - axis: The axis : .horizontal or .vertical
-          - delegate: The object receiving events for the view
-     */
-    public func makeElastic(withConstraint constraint: NSLayoutConstraint,
-                            onAxis axis: Axis,
-                            andDelegate delegate: BarcelonetaDelegate) {
-        //Check that the required settings are OK
-        if timerSettings.count == 0 {
-            print("CANNOT CONTINUE WITHOUT TIMER SETTINGS")
-            return
-        }
-        setDefaultIntervalSetting()
+
+    // MARK: Methods
+    ///Initializes the gesture
+    /// - Parameter timerSettings: The timer settings
+    /// - Parameter constraint: The constraint attached to the Barceloneta view
+    /// - Parameter axis: The axis : .horizontal or .vertical
+    /// - Parameter delegate: An optional BarcelonetaDelegate object receiving events
+    public func makeElastic(timerSettings: [TimerSetting],
+                            constraint: NSLayoutConstraint,
+                            axis: Axis,
+                            delegate: BarcelonetaDelegate?) {
+        self.timerSettings = timerSettings
+        self.moveConstraint = constraint
         self.axis = axis
         self.delegate = delegate
-        self.moveConstraint = constraint
         self.originalConstant = moveConstraint.constant
         if elasticPanGesture == nil {
             elasticPanGesture = UIPanGestureRecognizer(target: self, action: #selector(Barceloneta.panned(_:)))
@@ -103,67 +104,61 @@ open class Barceloneta: UIView {
         }
     }
 
-    ///Called when the view moves (dragged by the user)
+    ///Called when the view moves (Panned by the user)
     @objc func panned(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
-            delegate?.barcelonetaDidStartMoving(self)
-            //The first set of the timer
-            addTimer(timerSettings[0].timer)
-            timerHasBeenCalledAtLeastOnce = false
+        if sender.state == .began, let beginTimerSeeting = firstTimerSetting {
+            startedPanning(timerSetting: beginTimerSeeting)
         }
 
-        let translation = self.axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x
+        handlePanning(translation: axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x)
+
+        if sender.state == UIGestureRecognizerState.ended { endedPanning() }
+    }
+
+    ///The user started dragging the view
+    /// - Parameter timerSettings: The timer settings
+    internal func startedPanning(timerSetting: TimerSetting) {
+        delegate?.barcelonetaDidStartMoving(self)
+        scheduleTimer(timerSetting.timer) //The first set of the timer
+        timerHasBeenCalledAtLeastOnce = false
+    }
+    ///Handle the dragging
+    /// - Parameter translation: The dragging translation movement
+    internal func handlePanning(translation: CGFloat) {
         //If ! movesUp, consider that the view moves down
-        movesUp = self.axis == .vertical ? (translation < 0) : (translation > 0)
-        //If the view is dragged beyond the draggingLimit (Up or down)
-        //too low
-        if translation > draggingLimit {
-            moveConstraint.constant = originalConstant + logConstraintValueForYPosition(translation)
-        } else if translation < (draggingLimit * -1.0) {
-            moveConstraint.constant = originalConstant + ((logConstraintValueForYPosition(translation * -1)) * -1)
-        } else {
-            moveConstraint.constant = originalConstant + translation
-        }
-
-        let prct = Int(100.0 / (draggingLimit/moveConstraint.constant))
-        percentage = prct < 0 ? prct * -1 : prct
-
+        movesUp = axis == .vertical ? (translation < 0) : (translation > 0)
+        moveConstraint.constant = movingValue(translation: translation,
+                                              limit: draggingLimit,
+                                              constant: originalConstant)
+        percentage = percentage(limit: draggingLimit, constant: moveConstraint.constant)
         //Find a timer setting matching the percentage
         if let timerSetting = timerSettings.filter({return $0.range ~= percentage}).first {
             if currentTimerSetting == nil || timerSetting != currentTimerSetting {
                 delegate?.barcelonetaDidReachNewTimerSetting(self, setting: timerSetting)
                 timer.invalidate()
-                //First called to avoid waiting after invalidating timers
-                timerCalled()
-                //Init and launch timer
-                addTimer(timerSetting.timer)
+                timerCalled() //Called first to avoid waiting after invalidating timers
+                scheduleTimer(timerSetting.timer)
             }
             currentTimerSetting = timerSetting
-            //If a setting is found, the incremental value is applied
-            incrementalValue = currentTimerSetting.increment
         }
+    }
+    ///The dragging ended. If one timer has not been kicked yet, kick it "manually".
+    internal func endedPanning() {
+        currentTimerSetting = nil
+        timer.invalidate()
+        if !timerHasBeenCalledAtLeastOnce { //-> Allows a basic increment with a quick pan of the view
+            timerCalled()
+        }
+        animateViewBackToOrigin()
+    }
+    ///Computed var returning the optional first TimerSetting in the list.
+    var firstTimerSetting: TimerSetting? {
+        return timerSettings.first
+    }
 
-        if sender.state == UIGestureRecognizerState.ended {
-            currentTimerSetting = nil
-            timer.invalidate()
-            setDefaultIntervalSetting()
-            //Allow a basic increment with a quick pan of the view
-            if !timerHasBeenCalledAtLeastOnce {
-                timerCalled()
-            }
-            animateViewBackToOrigin()
-        }
-    }
-    ///Set to the original incremental value
-    fileprivate func setDefaultIntervalSetting() {
-        incrementalValue = timerSettings[0].increment
-    }
-    /**
-        Sets the timer with the interval
-        - parameters:
-          - interval: The double interval for executing the timer
-     */
-    fileprivate func addTimer(_ interval: Double) {
+    ///Sets the timer with the interval
+    /// - Parameter interval: The double interval for executing the timer
+    internal func scheduleTimer(_ interval: Double) {
         timer = Timer.scheduledTimer(timeInterval: interval,
                                      target: self,
                                      selector: #selector(Barceloneta.timerCalled),
@@ -177,29 +172,51 @@ open class Barceloneta: UIView {
         movesUp ? increment() : decrement()
     }
 
-    /**
-        Calculate the constraint value for the rubber effect
-        - parameters:
-          - yPosition: the position of the view
-        - returns: The updated position for the rubber effect
-     */
-    fileprivate func logConstraintValueForYPosition(_ yPosition: CGFloat) -> CGFloat {
-        return draggingLimit * (1 + log10(yPosition/draggingLimit))
+    ///Calculates the percentage value of the move
+    /// - Parameter limit: The maximum dragging limit
+    /// - Parameter constant: The constraint's actual constant
+    /// - Returns: Int: The percentage value
+    internal func percentage(limit: CGFloat, constant: CGFloat) -> Int {
+        let prct = Int(100.0 / (limit / constant))
+        return prct < 0 ? prct * -1 : prct
+    }
+
+    ///Calculates the value to move the view
+    /// - Parameter translation: The gesture translation value
+    /// - Parameter limit: The maximum dragging limit
+    /// - Parameter constant: The constraint's actual constant
+    /// - Returns: CGFloat: The new value to apply to the constraint's constant.
+    internal func movingValue(translation: CGFloat, limit: CGFloat, constant: CGFloat) -> CGFloat {
+        //If the view is dragged beyond the draggingLimit (Up or down)
+        //too low
+        if translation > limit {
+            return constant + logarithm(limit, translation)
+        } else if translation < (limit * -1.0) {
+            return constant + (logarithm(limit, translation * -1) * -1)
+        } else {
+            return constant + translation
+        }
+    }
+
+    ///Calculate the value for the rubber effect
+    ///A user may have several memberships, but on different markets.
+    /// - Parameter limit: the dragging limit of the view
+    /// - Parameter yPosition: the position of the view
+    /// - Returns: CGFloat: The updated position for the rubber effect
+    internal func logarithm(_ limit: CGFloat, _ yPosition: CGFloat) -> CGFloat {
+        return limit * (1 + log10(yPosition / limit))
     }
     ///Increment the value
-    fileprivate func increment() {
+    internal func increment() {
         checkAndApply(value + incrementalValue)
     }
     ///Decrement the value
-    fileprivate func decrement() {
+    internal func decrement() {
         checkAndApply(value - incrementalValue)
     }
-    /**
-     Checks what to do with the new value, depending if loops or not
-        - parameters:
-          - newValue: The value to check and apply
-     */
-    func checkAndApply(_ newValue: Double) {
+    ///Checks what to do with the new value, depending if loops or not
+    /// - Parameter newValue: The value to check and apply
+    internal func checkAndApply(_ newValue: Double) {
         var checkedValue = value
         if newValue > maximumValue {
             checkedValue = loops ? minimumValue : maximumValue
@@ -216,7 +233,7 @@ open class Barceloneta: UIView {
     }
 
     ///Restore the view to the original position with animation
-    fileprivate func animateViewBackToOrigin() {
+    internal func animateViewBackToOrigin() {
         moveConstraint.constant = originalConstant
         self.delegate?.barcelonetaDidRelease(self)
         UIView.animate(withDuration: 0.3,
