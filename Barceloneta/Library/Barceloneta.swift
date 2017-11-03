@@ -110,12 +110,9 @@ open class Barceloneta: UIView {
             startedPanning(timerSetting: beginTimerSeeting)
         }
 
-        let translationValue = self.axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x
-        handlePanning(translation: translationValue)
+        handlePanning(translation: axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x)
 
-        if sender.state == UIGestureRecognizerState.ended {
-            endedPanning()
-        }
+        if sender.state == UIGestureRecognizerState.ended { endedPanning() }
     }
 
     ///The user started dragging the view
@@ -129,7 +126,7 @@ open class Barceloneta: UIView {
     /// - Parameter translation: The dragging translation movement
     internal func handlePanning(translation: CGFloat) {
         //If ! movesUp, consider that the view moves down
-        movesUp = self.axis == .vertical ? (translation < 0) : (translation > 0)
+        movesUp = axis == .vertical ? (translation < 0) : (translation > 0)
         moveConstraint.constant = movingValue(translation: translation,
                                               limit: draggingLimit,
                                               constant: originalConstant)
@@ -161,7 +158,7 @@ open class Barceloneta: UIView {
 
     ///Sets the timer with the interval
     /// - Parameter interval: The double interval for executing the timer
-    fileprivate func scheduleTimer(_ interval: Double) {
+    internal func scheduleTimer(_ interval: Double) {
         timer = Timer.scheduledTimer(timeInterval: interval,
                                      target: self,
                                      selector: #selector(Barceloneta.timerCalled),
@@ -179,7 +176,7 @@ open class Barceloneta: UIView {
     /// - Parameter limit: The maximum dragging limit
     /// - Parameter constant: The constraint's actual constant
     /// - Returns: Int: The percentage value
-    func percentage(limit: CGFloat, constant: CGFloat) -> Int {
+    internal func percentage(limit: CGFloat, constant: CGFloat) -> Int {
         let prct = Int(100.0 / (limit / constant))
         return prct < 0 ? prct * -1 : prct
     }
@@ -189,7 +186,7 @@ open class Barceloneta: UIView {
     /// - Parameter limit: The maximum dragging limit
     /// - Parameter constant: The constraint's actual constant
     /// - Returns: CGFloat: The new value to apply to the constraint's constant.
-    func movingValue(translation: CGFloat, limit: CGFloat, constant: CGFloat) -> CGFloat {
+    internal func movingValue(translation: CGFloat, limit: CGFloat, constant: CGFloat) -> CGFloat {
         //If the view is dragged beyond the draggingLimit (Up or down)
         //too low
         if translation > limit {
@@ -206,20 +203,20 @@ open class Barceloneta: UIView {
     /// - Parameter limit: the dragging limit of the view
     /// - Parameter yPosition: the position of the view
     /// - Returns: CGFloat: The updated position for the rubber effect
-    fileprivate func logarithm(_ limit: CGFloat, _ yPosition: CGFloat) -> CGFloat {
+    internal func logarithm(_ limit: CGFloat, _ yPosition: CGFloat) -> CGFloat {
         return limit * (1 + log10(yPosition / limit))
     }
     ///Increment the value
-    fileprivate func increment() {
+    internal func increment() {
         checkAndApply(value + incrementalValue)
     }
     ///Decrement the value
-    fileprivate func decrement() {
+    internal func decrement() {
         checkAndApply(value - incrementalValue)
     }
     ///Checks what to do with the new value, depending if loops or not
     /// - Parameter newValue: The value to check and apply
-    func checkAndApply(_ newValue: Double) {
+    internal func checkAndApply(_ newValue: Double) {
         var checkedValue = value
         if newValue > maximumValue {
             checkedValue = loops ? minimumValue : maximumValue
@@ -236,7 +233,7 @@ open class Barceloneta: UIView {
     }
 
     ///Restore the view to the original position with animation
-    fileprivate func animateViewBackToOrigin() {
+    internal func animateViewBackToOrigin() {
         moveConstraint.constant = originalConstant
         self.delegate?.barcelonetaDidRelease(self)
         UIView.animate(withDuration: 0.3,

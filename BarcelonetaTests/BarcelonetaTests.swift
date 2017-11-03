@@ -2,8 +2,8 @@
 //  BarcelonetaTests.swift
 //  BarcelonetaTests
 //
-//  Created by Arnaud Schloune on 17/05/16.
-//  Copyright © 2016 Arnaud Schloune. All rights reserved.
+//  Created by Arnaud Schloune on 03/11/17.
+//  Copyright © 2017 Arnaud Schloune. All rights reserved.
 //
 
 import XCTest
@@ -11,13 +11,30 @@ import XCTest
 
 class BarcelonetaTests: XCTestCase {
 
+    var bcn: Barceloneta?
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        bcn = Barceloneta()
+    }
+
+    /*
+    func testBarceloneta_Should(){
+        //Given
+        //When
+        //Then
+    }
+    */
+
+    func testBarceloneta_ShouldCalculateCorrectPercentage() {
+        //Given
+        //When
+        //Then
+        XCTAssertTrue(true)
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        bcn = nil
     }
 }
