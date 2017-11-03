@@ -18,13 +18,6 @@ class BarcelonetaTests: XCTestCase {
         bcn = Barceloneta()
     }
 
-    /*
-    func testBarceloneta_Should(){
-        //Given
-        //When
-        //Then
-    }
-    */
     func testBarceloneta_ShouldCalculateCorrectPercentage() {
         //Given
         let limit: CGFloat = 50.0
@@ -40,6 +33,19 @@ class BarcelonetaTests: XCTestCase {
         XCTAssertEqual(prct80, 80)
         XCTAssertEqual(prct100, 100)
         XCTAssertEqual(prct120, 120)
+    }
+
+    func testBarceloneta_ShouldCalculateCorrectMovingValue() {
+        //Given
+        let limit: CGFloat = 50.0
+        //When
+        let moving36 = bcn?.movingValue(translation: CGFloat(12), limit: limit, constant: CGFloat(24.5))
+        let moving64 = bcn?.movingValue(translation: CGFloat(18.4), limit: limit, constant: CGFloat(46.5))
+        let moving70 = bcn?.movingValue(translation: CGFloat(40), limit: limit, constant: CGFloat(30))
+        //Then
+        XCTAssertEqual(moving36, 36.5)
+        XCTAssertEqual(moving64, 64.9)
+        XCTAssertEqual(moving70, 70.0)
     }
 
     override func tearDown() {
