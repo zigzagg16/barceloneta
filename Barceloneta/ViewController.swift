@@ -18,8 +18,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        barcelonetaView.layer.cornerRadius = 6.0
-        enableBarceloneta(.horizontal)
+        barcelonetaView.layer.cornerRadius = 25
+        enableBarceloneta(.vertical)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,15 +30,13 @@ class ViewController: UIViewController {
 
     // MARK: - Settings
     @IBAction func changedAxis(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            enableBarceloneta(.horizontal)
-        } else {
-            enableBarceloneta(.vertical)
-        }
+        enableBarceloneta(sender.selectedSegmentIndex == 0 ? .vertical : .horizontal)
     }
+
     @IBAction func changedLooping(_ sender: UISwitch) {
         barcelonetaView.loops = sender.isOn
     }
+
     private func enableBarceloneta(_ axis: Axis) {
         let timerSettings = [
             (range: 0..<70, timer: 0.3, increment: 1.0),
@@ -77,14 +75,11 @@ extension ViewController: BarcelonetaDelegate {
     fileprivate func color(forMinimalRange range: Int) -> UIColor {
         switch range {
         case 70:
-            //Orange
-            return UIColor(red: 1.00, green: 0.66, blue: 0.16, alpha: 1.00)
+            return UIColor(red: 1.00, green: 0.66, blue: 0.16, alpha: 1.00) //Orange
         case 120:
-            //Red
-            return UIColor(red: 0.90, green: 0.31, blue: 0.26, alpha: 1.00)
+            return UIColor(red: 0.90, green: 0.31, blue: 0.26, alpha: 1.00) //Red
         default:
-            //Green
-            return UIColor(red: 0.22, green: 0.80, blue: 0.46, alpha: 1.00)
+            return UIColor(red: 0.22, green: 0.80, blue: 0.46, alpha: 1.00) //Green
         }
     }
 }
