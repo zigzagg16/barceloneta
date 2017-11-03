@@ -61,6 +61,33 @@ class BarcelonetaTests: XCTestCase {
         XCTAssertEqual(log39!, CGFloat(39.108), accuracy: CGFloat(0.001))
     }
 
+    func testBarceloneta_ShouldCheckAndApply() {
+        //Given
+        bcn?.loops = false
+        bcn?.maximumValue =  30.0
+        //When
+        bcn?.checkAndApply(40.0)
+        //Then
+        XCTAssertEqual(bcn!.value, 30.0)
+
+        //Given
+        bcn?.loops = false
+        bcn?.maximumValue =  30.0
+        //When
+        bcn?.checkAndApply(29.81)
+        //Then
+        XCTAssertEqual(bcn!.value, 29.81)
+
+        //Given
+        bcn?.loops = true
+        bcn?.maximumValue =  30.0
+        //When
+        bcn?.checkAndApply(40.0)
+        //Then
+        print(bcn!.value)
+        XCTAssertEqual(bcn!.value, 0.0)
+    }
+
     override func tearDown() {
         super.tearDown()
         bcn = nil
