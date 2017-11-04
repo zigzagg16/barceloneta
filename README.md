@@ -13,13 +13,13 @@ barceloneta is the right way to increment/decrement values with a simple gesture
 
 ## Features
 
-- [x] Customisation for timer and incremental values
-- [x] Easily customisable
-- [x] Horizontal/vertical mode
-- [x] Looping through values or not 
-- [x] Customizable dragging limit
-- [x] Minimal/maximal values
-- [x] [Complete Documentation](http://arn00s.github.io/barceloneta/)
+- Customisation for timer and incremental values
+- Easily customisable
+- Horizontal/vertical mode
+- Looping through values or not
+- Customizable dragging limit
+- Minimal/maximal values
+- [Complete Documentation](http://arn00s.github.io/barceloneta/)
 
 ## Requirements
 
@@ -30,7 +30,7 @@ barceloneta is the right way to increment/decrement values with a simple gesture
 
 ## Communication
 
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/barceloneta). (Tag 'Barceloneta')
+- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/barceloneta). (Tag '#barceloneta')
 - If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/barceloneta).
 - If you **found a bug**, open an issue.
 - If you **have a feature request**, open an issue.
@@ -77,14 +77,15 @@ To enable the gesture, it is required to have :
 barcelonetaView.loops = true
 barcelonetaView.minimumValue = 0.0
 barcelonetaView.maximumValue = 50.0
-barcelonetaView.timerSettings = [
-       (range: 0..<70, timer: 0.3, increment: 1.0),
-       (range: 70..<120, timer: 0.2, increment: 2.0),
-       (range: 120..<500, timer: 0.1, increment: 3.0)
+let timerSettings = [
+    (range: 0..<70, timer: 0.3, increment: 1.0),
+    (range: 70..<120, timer: 0.2, increment: 2.0),
+    (range: 120..<500, timer: 0.1, increment: 3.0)
 ]
-barcelonetaView.makeElastic(withConstraint: bcnViewHorizontalConstraint,
-                                    onAxis: .horizontal,
-                               andDelegate: self)
+barcelonetaView.makeElastic(timerSettings: timerSettings,
+                            constraint: myNSLayoutConstraint
+                            axis: .vertical,
+                            delegate: self)
 ```
 
 ### Configuration
@@ -113,7 +114,7 @@ barcelonetaView.maximumValue = 50.0
 ```
 
 #### Dragging limit
-This value defines the dragging limit of your `barceloneta` object. If the user draggs the view higher than this limit, a rubber effect will apply. The view will go up/down slower than your finger.
+This value defines the dragging limit of your `barceloneta` object. If the user drags the view higher than this limit, a rubber effect will apply. The view will go up/down slower than your finger.
 
 ```swift
 barcelonetaView.draggingLimit = 50.0
@@ -121,12 +122,12 @@ barcelonetaView.draggingLimit = 50.0
 
 #### Timer Settings
 
-The timerSettings property is an array of bjects, defining the timer interval and incremental value for a specific range.
+The timerSettings property is an array of objects, defining the timer interval and incremental value for a specific range.
 It is required to have at least an object in the timer setting.
 
 Depending on the percentage, the matching settings will be applied.
 
-A deplacement of 100% corresponds to the draggingLimit.
+A drag of 100% corresponds to the draggingLimit.
 
 ```swift
 (range:0..<70, timer: 0.3, increment: 1.0)
@@ -145,8 +146,6 @@ If you installed `barceloneta` via CocoaPods and use it with Storyboard/xib, you
 
 ## TODO
 
-- A more Swifty code
-- Unit testing
 - UI Testing
 
 ## Known issues
@@ -167,7 +166,7 @@ You're looking for an innovative way to increment/decrement values
 ## Contact
 
 - [LinkedIn](https://lu.linkedin.com/in/arnaudschloune)
-- [twitter](https://twitter.com/arnaud_momo)
+- [twitter](https://twitter.com/mmommommomo)
 
 ### Creator
 
