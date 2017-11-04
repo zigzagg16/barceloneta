@@ -84,7 +84,7 @@ let timerSettings = [
 ]
 barcelonetaView.makeElastic(timerSettings: timerSettings,
                             constraint: myNSLayoutConstraint
-                            axis: axis,
+                            axis: .vertical,
                             delegate: self)
 ```
 
