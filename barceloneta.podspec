@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "barceloneta"
-  s.version      = "1.0.3"
+  s.version      = "1.1"
   s.summary      = "The right way to increment/decrement values with a simple gesture on iOS."
   s.description  = <<-DESC
                    Barceloneta is the right way to increment/decrement values with a simple gesture on iOS
@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.author             = { "Arnaud Schloune" => "arnaud.schloune@gmail.com" }
   s.social_media_url   = "https://twitter.com/mmommommomo"
   s.platform     = :ios, "9.0"
-  s.source       = { :git => "https://github.com/arn00s/barceloneta.git", :tag => "1.0.3" }
+  s.source       = { :git => "https://github.com/arn00s/barceloneta.git", :tag => s.version.to_s }
   s.source_files  = "Classes", "Barceloneta/Library/Barceloneta.swift"
-  s.requires_arc = true
 end

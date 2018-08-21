@@ -40,13 +40,13 @@ barceloneta is the right way to increment/decrement values with a simple gesture
 ## Installation
 
 ### CocoaPods
-Barceloneta is now available on [CocoaPods](http://cocoapods.org). 
+Barceloneta is now available on [CocoaPods](http://cocoapods.org).
 Simply add the following to your project Podfile, and you'll be good to go.
 
 ```ruby
 use_frameworks!
 
-pod 'barceloneta'
+pod 'barceloneta', '~> 1.1'
 ```
 
 ### Carthage
@@ -95,9 +95,9 @@ barcelonetaView.makeElastic(timerSettings: timerSettings,
 
 #### Looping of values
 
-Determines if the values will stop on minimumValue/maximumValue. 
+Determines if the values will stop on minimumValue/maximumValue.
 
-If looping is enabled, when the maximum value is reached, it will go back to the mimimum value. 
+If looping is enabled, when the maximum value is reached, it will go back to the mimimum value.
 
 And vice-versa.
 
