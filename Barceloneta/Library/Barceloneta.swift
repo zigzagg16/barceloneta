@@ -45,7 +45,7 @@ public enum Axis {
     ///Vertical
     case vertical
 }
-
+///Tuple defining a TimerSetting : Range, timer, and increment value
 public typealias TimerSetting = (range: CountableRange<Int>, timer: Double, increment: Double)
 
 ///The Barceloneta class
@@ -216,7 +216,7 @@ open class Barceloneta: UIView {
     }
     ///Checks what to do with the new value, depending if loops or not
     /// - Parameter newValue: The value to check and apply
-    internal func checkAndApply(_ newValue: Double) {
+    private func checkAndApply(_ newValue: Double) {
         var checkedValue = value
         if newValue > maximumValue {
             checkedValue = loops ? minimumValue : maximumValue
@@ -226,14 +226,16 @@ open class Barceloneta: UIView {
             checkedValue = newValue
         }
 
-        if value != checkedValue {
+        if value == checkedValue {
+            feedback(positive: false)
+        } else {
             value = checkedValue
             delegate?.barcelonetaDidChangeValue(self, value: value)
+            feedback(positive: true)
         }
     }
-
     ///Restore the view to the original position with animation
-    internal func animateViewBackToOrigin() {
+    private func animateViewBackToOrigin() {
         moveConstraint.constant = originalConstant
         self.delegate?.barcelonetaDidRelease(self)
         UIView.animate(withDuration: 0.3,
@@ -244,5 +246,18 @@ open class Barceloneta: UIView {
                        animations: { () -> Void in
             self.superview!.layoutIfNeeded()
         })
+    }
+    ///Haptick feedback, if supported. Min iOS 10.0.
+    /// - Parameter positive: The value was changed.  If false, an impact feedback is launched
+    private func feedback(positive: Bool) {
+        if #available(iOS 10.0, *) {
+            if positive {
+                let selectionFeedback = UISelectionFeedbackGenerator()
+                selectionFeedback.selectionChanged()
+            } else {
+                let feedback = UIImpactFeedbackGenerator(style: .medium)
+                feedback.impactOccurred()
+            }
+        }
     }
 }
