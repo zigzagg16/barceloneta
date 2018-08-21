@@ -45,7 +45,7 @@ public enum Axis {
     ///Vertical
     case vertical
 }
-
+///Tuple defining a TimerSetting : Range, timer, and increment value
 public typealias TimerSetting = (range: CountableRange<Int>, timer: Double, increment: Double)
 
 ///The Barceloneta class
