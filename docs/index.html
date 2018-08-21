@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Barceloneta  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Barceloneta  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Barceloneta Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/arn00s/barceloneta"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Barceloneta Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Barceloneta  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Barceloneta.html">Barceloneta</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/Axis.html">Axis</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/BarcelonetaDelegate.html">BarcelonetaDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:11Barceloneta12TimerSettinga">TimerSetting</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='barceloneta' class='heading'>barceloneta</h1>
+
+<p><a href="https://img.shields.io/cocoapods/v/barceloneta.svg"><img src="https://img.shields.io/cocoapods/v/barceloneta.svg" alt="CocoaPods Compatible"></a>
+<a href="https://github.com/sindresorhus/awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a>
+<a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a></p>
+
+<p>The right way to increment/decrement values</p>
+
+<p><img src="https://raw.githubusercontent.com/arn00s/barceloneta/master/img/barceloneta.gif" alt=""></p>
+
+<p>barceloneta is the right way to increment/decrement values with a simple gesture on iOS</p>
+<h2 id='features' class='heading'>Features</h2>
+
+<ul>
+<li>Customisation for timer and incremental values</li>
+<li>Easily customisable</li>
+<li>Horizontal/vertical mode</li>
+<li>Looping through values or not</li>
+<li>Customizable dragging limit</li>
+<li>Minimal/maximal values</li>
+<li><a href="http://arn00s.github.io/barceloneta/">Complete Documentation</a></li>
+</ul>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>Autolayout</li>
+<li>iOS 9.0+</li>
+<li>Swift 3.0</li>
+<li>Xcode 8.0 or higher</li>
+</ul>
+<h2 id='communication' class='heading'>Communication</h2>
+
+<ul>
+<li>If you <strong>need help</strong>, use <a href="http://stackoverflow.com/questions/tagged/barceloneta">Stack Overflow</a>. (Tag &lsquo;#barceloneta&rsquo;)</li>
+<li>If you&rsquo;d like to <strong>ask a general question</strong>, use <a href="http://stackoverflow.com/questions/tagged/barceloneta">Stack Overflow</a>.</li>
+<li>If you <strong>found a bug</strong>, open an issue.</li>
+<li>If you <strong>have a feature request</strong>, open an issue.</li>
+<li>If you <strong>want to contribute</strong>, submit a pull request.</li>
+<li>If you <strong>use the control</strong>, contact me to mention your app on this page.</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p>Barceloneta is now available on <a href="http://cocoapods.org">CocoaPods</a>. 
+Simply add the following to your project Podfile, and you&rsquo;ll be good to go.</p>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+
+<span class="n">pod</span> <span class="s1">'barceloneta'</span>
+</code></pre>
+<h3 id='carthage' class='heading'>Carthage</h3>
+
+<p>Coming soon</p>
+<h3 id='manually' class='heading'>Manually</h3>
+
+<p>You can integrate <code>barceloneta</code> into your project manually.</p>
+<h4 id='source-file' class='heading'>Source File</h4>
+
+<p>Simply add the <code>Library/Barceloneta.swift</code> source file directly into your project.</p>
+
+<hr>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='enabling-the-gesture-easy' class='heading'>Enabling the gesture (EASY !)</h3>
+
+<p>To enable the gesture, it is required to have :</p>
+
+<ul>
+<li>A UIView object</li>
+<li>A NSLayoutConstraint applied to the view, for the vertical position of the view</li>
+<li>Timer/Incremental settings</li>
+<li>A delegate (optional)</li>
+</ul>
+<pre class="highlight swift"><code><span class="c1">//Initialise the gesture</span>
+<span class="n">barcelonetaView</span><span class="o">.</span><span class="n">loops</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">barcelonetaView</span><span class="o">.</span><span class="n">minimumValue</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">barcelonetaView</span><span class="o">.</span><span class="n">maximumValue</span> <span class="o">=</span> <span class="mf">50.0</span>
+<span class="k">let</span> <span class="nv">timerSettings</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">70</span><span class="p">,</span> <span class="nv">timer</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="nv">increment</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="mi">70</span><span class="o">..&lt;</span><span class="mi">120</span><span class="p">,</span> <span class="nv">timer</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="nv">increment</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="mi">120</span><span class="o">..&lt;</span><span class="mi">500</span><span class="p">,</span> <span class="nv">timer</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nv">increment</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">barcelonetaView</span><span class="o">.</span><span class="nf">makeElastic</span><span class="p">(</span><span class="nv">timerSettings</span><span class="p">:</span> <span class="n">timerSettings</span><span class="p">,</span>
+                            <span class="nv">constraint</span><span class="p">:</span> <span class="n">myNSLayoutConstraint</span>
+                            <span class="nv">axis</span><span class="p">:</span> <span class="o">.</span><span class="n">vertical</span><span class="p">,</span>
+                            <span class="nv">delegate</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+</code></pre>
+<h3 id='configuration' class='heading'>Configuration</h3>
+
+<blockquote>
+<p>That&rsquo;s where the fun begins.
+Keep in mind that the goal of this library is only to manage the incrementation of values. The display should be managed by you.</p>
+</blockquote>
+<h4 id='looping-of-values' class='heading'>Looping of values</h4>
+
+<p>Determines if the values will stop on minimumValue/maximumValue. </p>
+
+<p>If looping is enabled, when the maximum value is reached, it will go back to the mimimum value. </p>
+
+<p>And vice-versa.</p>
+<pre class="highlight swift"><code><span class="n">barcelonetaView</span><span class="o">.</span><span class="n">loops</span> <span class="o">=</span> <span class="kc">true</span><span class="o">/</span><span class="kc">false</span>
+</code></pre>
+<h4 id='minimum-maximum-values' class='heading'>Minimum/Maximum values</h4>
+
+<p>Determines the limits of the increment</p>
+<pre class="highlight swift"><code><span class="n">barcelonetaView</span><span class="o">.</span><span class="n">minimumValue</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">barcelonetaView</span><span class="o">.</span><span class="n">maximumValue</span> <span class="o">=</span> <span class="mf">50.0</span>
+</code></pre>
+<h4 id='dragging-limit' class='heading'>Dragging limit</h4>
+
+<p>This value defines the dragging limit of your <code>barceloneta</code> object. If the user drags the view higher than this limit, a rubber effect will apply. The view will go up/down slower than your finger.</p>
+<pre class="highlight swift"><code><span class="n">barcelonetaView</span><span class="o">.</span><span class="n">draggingLimit</span> <span class="o">=</span> <span class="mf">50.0</span>
+</code></pre>
+<h4 id='timer-settings' class='heading'>Timer Settings</h4>
+
+<p>The timerSettings property is an array of objects, defining the timer interval and incremental value for a specific range.
+It is required to have at least an object in the timer setting.</p>
+
+<p>Depending on the percentage, the matching settings will be applied.</p>
+
+<p>A drag of 100% corresponds to the draggingLimit.</p>
+<pre class="highlight swift"><code><span class="p">(</span><span class="nv">range</span><span class="p">:</span><span class="mi">0</span><span class="o">..&lt;</span><span class="mi">70</span><span class="p">,</span> <span class="nv">timer</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="nv">increment</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">)</span>
+</code></pre>
+
+<p>This setting says that :</p>
+
+<p>Between <code>0</code> and <code>70%</code>, the timer interval for incrementation is <code>0.3 seconds</code>, and the value incremented is <code>1.0</code>.</p>
+
+<p><img src="https://raw.githubusercontent.com/arn00s/barceloneta/master/img/barceloneta_explanation.png" alt=""></p>
+<h4 id='crash-when-running-the-app' class='heading'>Crash when running the app ?</h4>
+
+<p>If you installed <code>barceloneta</code> via CocoaPods and use it with Storyboard/xib, you may need to set the module :</p>
+
+<p><img src="https://raw.githubusercontent.com/arn00s/barceloneta/master/img/custom-module-storyboard.png" alt=""></p>
+<h2 id='todo' class='heading'>TODO</h2>
+
+<ul>
+<li>UI Testing</li>
+</ul>
+<h2 id='known-issues' class='heading'>Known issues</h2>
+
+<p>Check the (<a href="https://github.com/arn00s/barceloneta/issues">GitHub issues</a>)</p>
+<h2 id='faq' class='heading'>FAQ</h2>
+<h3 id='why-should-i-use-code-barceloneta-code' class='heading'>Why should I use <code><a href="Classes/Barceloneta.html">Barceloneta</a></code>?</h3>
+
+<p>You&rsquo;re looking for an innovative way to increment/decrement values</p>
+<h2 id='special-thanks' class='heading'>Special thanks</h2>
+
+<p><a href="https://github.com/Produkt/RubberBandEffect">RuberBandEffect</a></p>
+<h2 id='contact' class='heading'>Contact</h2>
+
+<ul>
+<li><a href="https://lu.linkedin.com/in/arnaudschloune">LinkedIn</a></li>
+<li><a href="https://twitter.com/mmommommomo">twitter</a></li>
+</ul>
+<h3 id='creator' class='heading'>Creator</h3>
+
+<ul>
+<li><a href="http://github.com/arn00s">Arnaud Schloune</a></li>
+</ul>
+<h2 id='license' class='heading'>License</h2>
+
+<p>Barceloneta is released under the MIT license. See LICENSE for details.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/mmommommomo" target="_blank" rel="external">Arnaud Schloune</a>. All rights reserved. (Last updated: 2018-08-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
