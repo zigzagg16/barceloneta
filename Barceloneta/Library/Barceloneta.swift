@@ -64,6 +64,7 @@ open class Barceloneta: UIView {
     ///Timer and increment settings
     public var timerSettings: [TimerSetting] = []
     ///The delegate, to receive events
+    //swiftlint:disable:next weak_delegate
     weak var delegate: BarcelonetaDelegate?
     ///The axis on which the view can be dragged
     public var axis: Axis = .vertical
@@ -112,7 +113,7 @@ open class Barceloneta: UIView {
 
         handlePanning(translation: axis == .vertical ? sender.translation(in: self).y : sender.translation(in: self).x)
 
-        if sender.state == UIGestureRecognizerState.ended { endedPanning() }
+        if sender.state == UIGestureRecognizer.State.ended { endedPanning() }
     }
 
     ///The user started dragging the view
@@ -242,7 +243,7 @@ open class Barceloneta: UIView {
                        delay: 0,
                        usingSpringWithDamping: 0.2,
                        initialSpringVelocity: 25,
-                       options: UIViewAnimationOptions.allowUserInteraction,
+                       options: UIView.AnimationOptions.allowUserInteraction,
                        animations: { () -> Void in
             self.superview!.layoutIfNeeded()
         })
