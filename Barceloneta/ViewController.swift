@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  Barceloneta
-//
-//  Created by Arnaud Schloune on 17/05/16.
-//  Copyright © 2016 Arnaud Schloune. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {

@@ -1,11 +1,3 @@
-//
-//  BarcelonetaTests.swift
-//  BarcelonetaTests
-//
-//  Created by Arnaud Schloune on 03/11/17.
-//  Copyright © 2017 Arnaud Schloune. All rights reserved.
-//
-
 import XCTest
 @testable import Barceloneta
 
