@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Barceloneta
-//
-//  Created by Arnaud Schloune on 17/05/16.
-//  Copyright © 2016 Arnaud Schloune. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
@@ -27,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, COSTouchVisualizerWindowD
 //        return customWindow
 //    }()
 
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    // swiftlint:disable:next line_length
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
     }

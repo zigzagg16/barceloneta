@@ -1,11 +1,3 @@
-//
-//  BarcelonetaUITests.swift
-//  BarcelonetaUITests
-//
-//  Created by Arnaud Schloune on 17/05/16.
-//  Copyright © 2016 Arnaud Schloune. All rights reserved.
-//
-
 import XCTest
 
 class BarcelonetaUITests: XCTestCase {
